@@ -1,0 +1,47 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://assets/prototyping/block/Block.tscn" type="PackedScene" id=1]
+
+[sub_resource type="ProceduralSky" id=1]
+
+[sub_resource type="Environment" id=2]
+background_mode = 2
+background_sky = SubResource( 1 )
+ambient_light_color = Color( 0.796078, 0.929412, 1, 1 )
+ambient_light_energy = 0.44
+ambient_light_sky_contribution = 0.0
+ssao_enabled = true
+
+[node name="TestWorld" type="Spatial"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.001, 0.001, 0.001 )
+
+[node name="Block" parent="." instance=ExtResource( 1 )]
+transform = Transform( 100, 0, 0, 0, 0.1, 0, 0, 0, 100, 0, -0.1, 0 )
+
+[node name="Block2" parent="." instance=ExtResource( 1 )]
+transform = Transform( 1, 0, 0, 0, 3.32448, 0.707107, 0, -3.32448, 0.707107, 0, -0.0300579, -0.366341 )
+
+[node name="Block5" parent="." instance=ExtResource( 1 )]
+transform = Transform( 1, 0, 0, 0, 4.07164, 0.5, 0, -2.35076, 0.866025, -2.03984, -0.568395, -1.45691 )
+
+[node name="Block7" parent="." instance=ExtResource( 1 )]
+transform = Transform( 1, 0, 0, 0, 4.54132, 0.258819, 0, -1.21684, 0.965926, -3.9838, -0.80703, -2.68583 )
+
+[node name="Block8" parent="." instance=ExtResource( 1 )]
+transform = Transform( 1, 0, 0, 0, 4.70153, 1.49012e-08, 0, -1.19209e-07, 1, -5.9688, -0.692979, -3.92429 )
+
+[node name="Block4" parent="." instance=ExtResource( 1 )]
+transform = Transform( 1, 0, 0, 0, 3.1551, 0.866025, 0, -5.46479, 0.5, 2.06006, -0.0300579, 1.98539 )
+
+[node name="Block6" parent="." instance=ExtResource( 1 )]
+transform = Transform( 1, 0, 0, 0, 3.03912, 0.965926, 0, -11.3422, 0.258819, 4.06006, -0.0300579, 8.1245 )
+
+[node name="Block3" parent="." instance=ExtResource( 1 )]
+transform = Transform( 4.96925, 0, 0, 0, 0, 1, 0, -5.04, 0, 0, 2.99659, -8 )
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource( 2 )
+
+[node name="DirectionalLight" type="DirectionalLight" parent="."]
+transform = Transform( 0.892979, 0.101771, 0.438442, -0.444396, 0.353917, 0.822955, -0.0714194, -0.929724, 0.361267, -7.25267e-08, 8.69215, 4.0431e-07 )
+shadow_enabled = true

@@ -8,11 +8,37 @@
 
 config_version=4
 
+_global_script_classes=[ {
+"base": "Spatial",
+"class": "CameraBehavior",
+"language": "GDScript",
+"path": "res://src/player_logic/camera_stack/camera_behaviors/camera_behavior.gd"
+}, {
+"base": "Spatial",
+"class": "CameraStack",
+"language": "GDScript",
+"path": "res://src/player_logic/camera_stack/camera_stack.gd"
+}, {
+"base": "Spatial",
+"class": "PlayerSpawner",
+"language": "GDScript",
+"path": "res://src/player_logic/player_spawner/player_spawner.gd"
+} ]
+_global_script_class_icons={
+"CameraBehavior": "",
+"CameraStack": "res://resources/editor/custom_classes_icons/camera_lens.svg",
+"PlayerSpawner": "res://resources/editor/custom_classes_icons/player_spawner.svg"
+}
+
 [application]
 
 config/name="Fps Test"
 run/main_scene="res://assets/maps/TestWorld.tscn"
 config/icon="res://icon.png"
+
+[autoload]
+
+Logger="*res://src/debug/logger.gd"
 
 [physics]
 

@@ -1,4 +1,5 @@
 extends Node
+class_name Logger
 
 
 enum LOG_LEVEL {
@@ -7,6 +8,11 @@ enum LOG_LEVEL {
 	WARNING,
 	ERROR
 }
+
+
+
+func _init() -> void:
+	Service.register(self, Service.TYPE.LOG)
 
 
 

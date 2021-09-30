@@ -1,17 +1,24 @@
 extends CameraBehavior
 
 
-
-# Declare member variables here. Examples:
-# var a: int = 2
-# var b: String = "text"
+var rot_x = 0
+var rot_y = 0
 
 
-# Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	pass # Replace with function body.
+	add_child(InputListener.new(self, "_move_camera_x", InputListener.TYPE.VIEWX), true)
+	add_child(InputListener.new(self, "_move_camera_y", InputListener.TYPE.VIEWY), true)
 
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta: float) -> void:
-#	pass
+
+func _move_camera_x(amount: float) -> void:
+	rot_x += deg2rad(-amount)
+	transform.basis = Basis(Vector3.RIGHT, rot_y) # reset rotation
+	rotate_object_local(Vector3.UP, rot_x)
+
+
+
+func _move_camera_y(amount: float) -> void:
+	rot_y += deg2rad(-amount)
+	transform.basis = Basis(Vector3.UP, rot_x) # reset rotation
+	rotate_object_local(Vector3.RIGHT, rot_y)

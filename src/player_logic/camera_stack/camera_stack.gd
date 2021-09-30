@@ -18,7 +18,9 @@ func _create_stack() -> void:
 	for behavior in behaviors:
 		var behavior_node = behavior.new()
 		if not behavior_node is CameraBehavior:
-			Logger.output(Logger.LOG_LEVEL.ERROR, self, "Passed object is not a CameraBehavior!")
+			var logger := Service.fetch(Service.TYPE.LOG) as Logger
+			if logger:
+				logger.output(logger.LOG_LEVEL.ERROR, self, "Passed object is not a CameraBehavior!")
 			continue
 		_add_to_stack(behavior_node)
 
@@ -27,15 +29,15 @@ func _create_stack() -> void:
 func _generate_camera() -> void:
 	var camera := Camera.new()
 	if _behaviors_stack.size() > 0:
-		_behaviors_stack.back().add_child(camera)
+		_behaviors_stack.back().add_child(camera, true)
 	else:
-		add_child(camera)
+		add_child(camera, true)
 
 
 
 func _add_to_stack(behavior_node: CameraBehavior) -> void:
 	if _behaviors_stack.size() > 0:
-		_behaviors_stack.back().add_child(behavior_node)
+		_behaviors_stack.back().add_child(behavior_node, true)
 	else:
-		add_child(behavior_node)
+		add_child(behavior_node, true)
 	_behaviors_stack.append(behavior_node)

@@ -19,6 +19,16 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://src/player_logic/camera_stack/camera_stack.gd"
 }, {
+"base": "Node",
+"class": "InputListener",
+"language": "GDScript",
+"path": "res://src/engine/service/services/input/input_listener/input_listener.gd"
+}, {
+"base": "Node",
+"class": "Logger",
+"language": "GDScript",
+"path": "res://src/engine/service/services/debug/logger.gd"
+}, {
 "base": "Spatial",
 "class": "PlayerSpawner",
 "language": "GDScript",
@@ -27,6 +37,8 @@ _global_script_classes=[ {
 _global_script_class_icons={
 "CameraBehavior": "",
 "CameraStack": "res://resources/editor/custom_classes_icons/camera_lens.svg",
+"InputListener": "",
+"Logger": "",
 "PlayerSpawner": "res://resources/editor/custom_classes_icons/player_spawner.svg"
 }
 
@@ -38,7 +50,8 @@ config/icon="res://icon.png"
 
 [autoload]
 
-Logger="*res://src/debug/logger.gd"
+Service="*res://src/engine/service/service.gd"
+Autoload="res://src/engine/autoload/autoload.gd"
 
 [physics]
 

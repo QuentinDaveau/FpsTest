@@ -4,6 +4,7 @@ class_name CameraStack, "res://resources/editor/custom_classes_icons/camera_lens
 
 export(Array, Script) var behaviors := []
 
+var _player: Player = null
 var _behaviors_stack := []
 
 
@@ -11,6 +12,10 @@ var _behaviors_stack := []
 func _ready() -> void:
 	_create_stack()
 	_generate_camera()
+	_player = Service.fetch(Service.TYPE.FETCH_CHARACTER).from_owner(self)
+	if not _player:
+		Service.fetch(Service.TYPE.LOG).output(Logger.LEVEL.ERROR, self, "Owner is not a player. This node is expected to be used with a player as owner !")
+		return
 
 
 
@@ -20,7 +25,7 @@ func _create_stack() -> void:
 		if not behavior_node is CameraBehavior:
 			var logger := Service.fetch(Service.TYPE.LOG) as Logger
 			if logger:
-				logger.output(logger.LOG_LEVEL.ERROR, self, "Passed object is not a CameraBehavior!")
+				logger.output(logger.LEVEL.ERROR, self, "Passed object is not a CameraBehavior!")
 			continue
 		_add_to_stack(behavior_node)
 

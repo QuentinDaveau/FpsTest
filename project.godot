@@ -19,6 +19,16 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://src/player_logic/camera_stack/camera_stack.gd"
 }, {
+"base": "KinematicBody",
+"class": "Character",
+"language": "GDScript",
+"path": "res://src/character/character.gd"
+}, {
+"base": "Object",
+"class": "CharacterController",
+"language": "GDScript",
+"path": "res://src/character/character_controller/character_controller.gd"
+}, {
 "base": "Node",
 "class": "InputListener",
 "language": "GDScript",
@@ -29,6 +39,36 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://src/engine/service/services/debug/logger.gd"
 }, {
+"base": "Object",
+"class": "MovementAction",
+"language": "GDScript",
+"path": "res://src/player_logic/movement_state_machine/movement_state/movement_action/movement_action.gd"
+}, {
+"base": "Object",
+"class": "MovementState",
+"language": "GDScript",
+"path": "res://src/player_logic/movement_state_machine/movement_state/movement_state.gd"
+}, {
+"base": "Node",
+"class": "MovementStateMachine",
+"language": "GDScript",
+"path": "res://src/player_logic/movement_state_machine/movement_state_machine.gd"
+}, {
+"base": "Object",
+"class": "MovementTransition",
+"language": "GDScript",
+"path": "res://src/player_logic/movement_state_machine/movement_state/movement_transition/movement_transition.gd"
+}, {
+"base": "Character",
+"class": "Player",
+"language": "GDScript",
+"path": "res://src/player_logic/player/player.gd"
+}, {
+"base": "CharacterController",
+"class": "PlayerController",
+"language": "GDScript",
+"path": "res://src/player_logic/player_controller/player_controller.gd"
+}, {
 "base": "Spatial",
 "class": "PlayerSpawner",
 "language": "GDScript",
@@ -37,8 +77,16 @@ _global_script_classes=[ {
 _global_script_class_icons={
 "CameraBehavior": "",
 "CameraStack": "res://resources/editor/custom_classes_icons/camera_lens.svg",
+"Character": "",
+"CharacterController": "",
 "InputListener": "",
 "Logger": "",
+"MovementAction": "",
+"MovementState": "",
+"MovementStateMachine": "",
+"MovementTransition": "",
+"Player": "",
+"PlayerController": "",
 "PlayerSpawner": "res://resources/editor/custom_classes_icons/player_spawner.svg"
 }
 
@@ -52,6 +100,14 @@ config/icon="res://icon.png"
 
 Service="*res://src/engine/service/service.gd"
 Autoload="res://src/engine/autoload/autoload.gd"
+
+[input]
+
+ui_accept={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":16777221,"unicode":0,"echo":false,"script":null)
+ ]
+}
 
 [physics]
 

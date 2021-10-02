@@ -3,7 +3,8 @@ extends Node
 enum TYPE {
 	INPUT,
 	LOG,
-	SIGNAL
+	SIGNAL,
+	FETCH_CHARACTER
 }
 
 

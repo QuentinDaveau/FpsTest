@@ -2,15 +2,15 @@ extends Node
 class_name InputListener
 
 
-# TEMP: Should be moved somewhere else and is dipliacted in input.gd
-enum TYPE {VIEWX, VIEWY, MOTIONX, MOTIONY, SHOOT}
+# TEMP: Should be moved somewhere else and is duplicated in input.gd
+enum TYPE {VIEW, MOTION, SHOOT}
 
 signal input(value)
 
 var _target_type: int
 
 
-func _init(target: Node, method_name: String, type: int) -> void:
+func _init(target: Object, method_name: String, type: int) -> void:
 	_target_type = type
 	self.connect("input", target, method_name)
 	var input := Service.fetch(Service.TYPE.INPUT)
@@ -19,6 +19,6 @@ func _init(target: Node, method_name: String, type: int) -> void:
 
 
 
-func _on_input_received(type: int, value: float) -> void:
+func _on_input_received(type: int, value) -> void:
 	if type == _target_type:
 		emit_signal("input", value)

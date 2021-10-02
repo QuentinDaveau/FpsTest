@@ -2,7 +2,7 @@ extends Node
 
 
 # TEMP: Should be moved smewhere else
-enum TYPE {VIEWX, VIEWY, MOTIONX, MOTIONY, SHOOT}
+enum TYPE {VIEW, MOTION, SHOOT}
 
 signal input_received(type, value)
 

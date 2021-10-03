@@ -5,6 +5,8 @@ class_name MovementStateMachine
 Class dedicated to load, update and transition between different PlayerStates
 """
 
+signal player_state_changed(new_state)
+
 export(Array, Script) var states_paths := []
 
 var _player_controller: PlayerController = null
@@ -15,6 +17,7 @@ var _current_state: MovementState = null
 
 func _ready() -> void:
 	# Fetching controller to pass to the states
+	Service.fetch(Service.TYPE.SIGNAL).register(self, "player_state_changed")
 	_player_controller = Service.fetch(Service.TYPE.FETCH_CHARACTER).from_owner(self).get_controller()
 	if not _player_controller or not _player_controller is PlayerController:
 		Service.fetch(Service.TYPE.LOG).output(Logger.LEVEL.ERROR, self, "Owner is not a player. This node is expected to be used with a player as owner !")
@@ -39,6 +42,7 @@ func _physics_process(delta: float) -> void:
 
 
 func _enter_state(state: MovementState) -> void:
+	emit_signal("player_state_changed", state.get_identifier())
 	_current_state = state
 	for transition in _current_state.get_transitions():
 		transition.connect("state_exit", self, "_on_state_exit", [transition.get_next_state()])

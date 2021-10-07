@@ -47,7 +47,7 @@ _global_script_classes=[ {
 "base": "Reference",
 "class": "MovementAction",
 "language": "GDScript",
-"path": "res://src/player_logic/movement_state_machine/movement_state/movement_action/movement_action.gd"
+"path": "res://src/player_logic/movement_state_machine/movement_state/movement_action.gd"
 }, {
 "base": "Reference",
 "class": "MovementState",
@@ -67,7 +67,7 @@ _global_script_classes=[ {
 "base": "Reference",
 "class": "MovementTransition",
 "language": "GDScript",
-"path": "res://src/player_logic/movement_state_machine/movement_state/movement_transition/movement_transition.gd"
+"path": "res://src/player_logic/movement_state_machine/movement_transition.gd"
 }, {
 "base": "Character",
 "class": "Player",

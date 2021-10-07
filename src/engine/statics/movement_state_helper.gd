@@ -36,6 +36,14 @@ class IdleAction:
 
 
 
+
+
+# -- Air --
+
+
+
+
+# -- General --
 class MoveAction:
 	extends MovementAction
 	
@@ -60,7 +68,19 @@ class MoveAction:
 
 
 
-# -- Air --
+class SetAccelerationAction:
+	extends MovementAction
+	
+	var _acceleration := 0.0
+	
+	
+	#TEMP: Ensure that the injected acceleration value comes from a parameters file
+	func _init(controller: PlayerController, acceleration_value: float).(controller) -> void:
+		_acceleration = acceleration_value
+	
+	
+	func enter() -> void:
+		_controller.set_acceleration(_acceleration)
 
 
 
@@ -69,6 +89,7 @@ class TransitionToWalk:
 	extends MovementTransition
 	
 	var _listener: InputListener
+	var _motion_value: Vector2
 	
 	
 	func _init(controller: PlayerController).(controller) -> void:
@@ -79,9 +100,15 @@ class TransitionToWalk:
 		return "Walk"
 	
 	
-	func _on_motion_change(motion_value: Vector2) -> void:
-		if motion_value:
+	func check() -> bool:
+		if _motion_value:
 			_raise_state_exit()
+			return true
+		return false
+	
+	
+	func _on_motion_change(motion_value: Vector2) -> void:
+		_motion_value = motion_value
 
 
 
@@ -89,6 +116,7 @@ class TransitionToIdle:
 	extends MovementTransition
 	
 	var _listener: InputListener
+	var _motion_value: Vector2
 	
 	
 	func _init(controller: PlayerController).(controller) -> void:
@@ -99,7 +127,54 @@ class TransitionToIdle:
 		return "Idle"
 	
 	
+	func check() -> bool:
+		if not _motion_value:
+			_raise_state_exit()
+			return true
+		return false
+	
+	
 	func _on_motion_change(motion_value: Vector2) -> void:
-		if not motion_value:
-			_raise_state_exit() 
+		_motion_value = motion_value
+
+
+
+class TransitionToFall:
+	extends MovementTransition
+	
+	
+	func _init(controller: PlayerController).(controller) -> void:
+		pass
+	
+	
+	func get_next_state() -> String:
+		return "Fall"
+	
+	
+	func check() -> bool:
+		if not _controller.is_grounded():
+			_raise_state_exit()
+			return true
+		return false
+
+
+
+class TransitionAirToGround:
+	extends MovementTransition
+	
+	
+	func _init(controller: PlayerController).(controller) -> void:
+		pass
+	
+	
+	func get_next_state() -> String:
+		return "Idle"
+	
+	
+	func check() -> bool:
+		if _controller.is_grounded():
+			_raise_state_exit()
+			return true
+		return false
+
 

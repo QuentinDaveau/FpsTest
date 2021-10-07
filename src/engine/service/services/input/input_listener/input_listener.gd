@@ -8,6 +8,7 @@ enum TYPE {VIEW, MOTION, SHOOT}
 signal input(value)
 
 var _target_type: int
+var _last_input_value
 
 
 func _init(target: Object, method_name: String, type: int) -> void:
@@ -22,3 +23,4 @@ func _init(target: Object, method_name: String, type: int) -> void:
 func _on_input_received(type: int, value) -> void:
 	if type == _target_type:
 		emit_signal("input", value)
+		_last_input_value = value

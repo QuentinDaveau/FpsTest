@@ -11,6 +11,9 @@ var _relative_direction: Vector2 = Vector2.ZERO
 var _relative_velocity: Vector3 = Vector3.ZERO
 var _move_speed: float = 0.0
 
+# TEMP: lerp value will be defined in an acceleration parameter in a "parameters" file
+var _move_acceleration := 0.0
+
 
 
 func _init(target_character: KinematicBody).(target_character) -> void:
@@ -27,12 +30,17 @@ func move(relative_direction: Vector2, move_speed: float) -> void:
 
 func update(delta: float) -> void:
 	var new_velocity = _residual_velocity
-	# TEMP: lerp value will be defined in an acceleration parameter in a "parameters" file
-	new_velocity.x = lerp(new_velocity.x, _relative_velocity.x, 0.9)
-	new_velocity.z = lerp(new_velocity.z, _relative_velocity.z, 0.9)
+	
+	new_velocity.x = lerp(new_velocity.x, _relative_velocity.x, _move_acceleration)
+	new_velocity.z = lerp(new_velocity.z, _relative_velocity.z, _move_acceleration)
 	new_velocity = _add_gravity_to(new_velocity, delta)
 	apply_motion(new_velocity)
 	.update(delta)
+
+
+
+func set_acceleration(acceleration: float) -> void:
+	_move_acceleration = acceleration
 
 
 

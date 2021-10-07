@@ -24,5 +24,10 @@ func update(delta: float) -> void:
 
 
 func apply_motion(velocity: Vector3) -> void:
-	_residual_velocity = _target_character.move_and_slide(velocity)
+	_residual_velocity = _target_character.move_and_slide(velocity, Vector3.UP)
+
+
+
+func is_grounded() -> bool:
+	return _target_character.is_on_floor()
 

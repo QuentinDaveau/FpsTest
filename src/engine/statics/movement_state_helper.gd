@@ -152,7 +152,7 @@ class TransitionToFall:
 	
 	
 	func check() -> bool:
-		if not _controller.is_grounded():
+		if not _controller.is_grounded() and not _controller.is_on_slope():
 			_raise_state_exit()
 			return true
 		return false
@@ -173,6 +173,46 @@ class TransitionAirToGround:
 	
 	func check() -> bool:
 		if _controller.is_grounded():
+			_raise_state_exit()
+			return true
+		return false
+
+
+
+class TransitionAirToSlip:
+	extends MovementTransition
+	
+	
+	func _init(controller: PlayerController).(controller) -> void:
+		pass
+	
+	
+	func get_next_state() -> String:
+		return "Slip"
+	
+	
+	func check() -> bool:
+		if _controller.is_on_slope():
+			_raise_state_exit()
+			return true
+		return false
+
+
+
+class TransitionToSlip:
+	extends MovementTransition
+	
+	
+	func _init(controller: PlayerController).(controller) -> void:
+		pass
+	
+	
+	func get_next_state() -> String:
+		return "Slip"
+	
+	
+	func check() -> bool:
+		if _controller.is_on_slope() && not _controller.is_grounded():
 			_raise_state_exit()
 			return true
 		return false

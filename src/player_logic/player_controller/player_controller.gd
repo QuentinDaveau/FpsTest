@@ -10,6 +10,7 @@ var _camera_forward: Vector3 = Vector3.ZERO
 var _relative_direction: Vector2 = Vector2.ZERO
 var _relative_velocity: Vector3 = Vector3.ZERO
 var _move_speed: float = 0.0
+var _follow_floor: bool = true
 
 # TEMP: lerp value will be defined in an acceleration parameter in a "parameters" file
 var _move_acceleration := 0.0
@@ -21,19 +22,27 @@ func _init(target_character: KinematicBody).(target_character) -> void:
 
 
 
-func move(relative_direction: Vector2, move_speed: float) -> void:
+func move(relative_direction: Vector2, move_speed: float, follow_floor: bool = true) -> void:
 	_move_speed = move_speed
 	_relative_direction = relative_direction
+	_follow_floor = follow_floor
 	_relative_velocity = _get_forward_velocity()
 
 
 
 func update(delta: float) -> void:
-	var new_velocity = _residual_velocity
+	var new_velocity := _residual_velocity
 	
 	new_velocity.x = lerp(new_velocity.x, _relative_velocity.x, _move_acceleration)
 	new_velocity.z = lerp(new_velocity.z, _relative_velocity.z, _move_acceleration)
-	new_velocity = _add_gravity_to(new_velocity, delta)
+	
+	if _follow_floor and _target_character.get_floor_normal():
+		new_velocity = _add_gravity_to(new_velocity, delta, -_target_character.get_floor_normal())
+		new_velocity = new_velocity.slide(_target_character.get_floor_normal())
+	else:
+		new_velocity = _add_gravity_to(new_velocity, delta)
+	
+	
 	apply_motion(new_velocity)
 	.update(delta)
 
@@ -52,8 +61,8 @@ func _get_forward_velocity() -> Vector3:
 
 
 # TEMP: Arbitrary gravity value. It will be then set in a "parameters" file
-func _add_gravity_to(velocity_vector: Vector3, delta: float) -> Vector3:
-	return velocity_vector + Vector3(0.0, -9.8, 0.0) * delta
+func _add_gravity_to(velocity_vector: Vector3, delta: float, gravity_vector: Vector3 = Vector3.DOWN) -> Vector3:
+	return velocity_vector + gravity_vector.normalized() * 9.8 * delta
 
 
 

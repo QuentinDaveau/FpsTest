@@ -16,6 +16,7 @@ func _setup_state(controller: PlayerController) -> void:
 	]
 	_transitions = [
 		# TEMP
-		MovementStateHelper.TransitionAirToGround.new(controller)
+		MovementStateHelper.TransitionAirToGround.new(controller),
+		MovementStateHelper.TransitionToSlip.new(controller)
 	]
 

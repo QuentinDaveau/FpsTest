@@ -14,8 +14,9 @@ func _setup_state(controller: PlayerController) -> void:
 		MovementStateHelper.IdleAction.new(controller)
 	]
 	_transitions = [
+		MovementStateHelper.TransitionToSlip.new(controller),
+		MovementStateHelper.TransitionToFall.new(controller),
 		MovementStateHelper.TransitionToWalk.new(controller),
-		MovementStateHelper.TransitionToFall.new(controller)
 	]
 
 

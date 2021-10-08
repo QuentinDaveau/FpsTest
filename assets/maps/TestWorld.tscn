@@ -22,6 +22,9 @@ transform = Transform( 100, 0, 0, 0, 0.1, 0, 0, 0, 100, 0, -0.1, 0 )
 [node name="Block2" parent="." instance=ExtResource( 1 )]
 transform = Transform( 1, 0, 0, 0, 3.32448, 0.707107, 0, -3.32448, 0.707107, 0, -0.0300579, -0.366341 )
 
+[node name="Block9" parent="." instance=ExtResource( 1 )]
+transform = Transform( 1, 0, 0, 0, 3.60158, 0.642788, 0, -3.02208, 0.766045, 5.99807, -0.243762, -0.714413 )
+
 [node name="Block5" parent="." instance=ExtResource( 1 )]
 transform = Transform( 1, 0, 0, 0, 4.07164, 0.5, 0, -2.35076, 0.866025, -2.03984, -0.568395, -1.45691 )
 
@@ -38,7 +41,7 @@ transform = Transform( 1, 0, 0, 0, 3.1551, 0.866025, 0, -5.46479, 0.5, 2.06006, 
 transform = Transform( 1, 0, 0, 0, 3.03912, 0.965926, 0, -11.3422, 0.258819, 4.06006, -0.0300579, 8.1245 )
 
 [node name="Block3" parent="." instance=ExtResource( 1 )]
-transform = Transform( 4.96925, 0, 0, 0, 0, 1, 0, -5.04, 0, 0, 2.99659, -8 )
+transform = Transform( 7.01, 0, 0, 0, -2.20305e-07, 1, 0, -5.04, -4.37114e-08, 0, 2.99659, -8 )
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource( 2 )

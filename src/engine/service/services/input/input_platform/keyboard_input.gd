@@ -20,6 +20,8 @@ func _unhandled_input(event: InputEvent) -> void:
 		if _event_is_motion(event):
 			emit_signal("input_received", TYPE.MOTION, _get_motion_value())
 			return
+		if event.is_action("ui_select"):
+			emit_signal("input_received", TYPE.JUMP, event.pressed)
 
 
 

@@ -37,9 +37,19 @@ class IdleAction:
 
 
 
-
 # -- Air --
-
+class ApplyImpulseAction:
+	extends MovementAction
+	
+	var _impulse_value: Vector3
+	
+	
+	func _init(controller: PlayerController, impulse_value: Vector3).(controller) -> void:
+		_impulse_value = impulse_value
+	
+	
+	func enter() -> void:
+		_controller.impulse(_impulse_value)
 
 
 
@@ -81,6 +91,22 @@ class SetAccelerationAction:
 	
 	func enter() -> void:
 		_controller.set_acceleration(_acceleration)
+
+
+
+class SetGroundAttachAction:
+	extends MovementAction
+	
+	var _attach_to_ground: bool
+	
+	
+	#TEMP: Ensure that the injected acceleration value comes from a parameters file
+	func _init(controller: PlayerController, attach_to_ground: bool).(controller) -> void:
+		_attach_to_ground = attach_to_ground
+	
+	
+	func enter() -> void:
+		_controller.set_ground_attach(_attach_to_ground)
 
 
 
@@ -218,3 +244,28 @@ class TransitionToSlip:
 		return false
 
 
+
+class TransitionToJump:
+	extends MovementTransition
+	
+	var _listener: InputListener
+	var _should_jump: bool = false
+	
+	
+	func _init(controller: PlayerController).(controller) -> void:
+		_listener = InputListener.new(self, "_on_jump_change", InputListener.TYPE.JUMP)
+	
+	
+	func get_next_state() -> String:
+		return "Jump"
+	
+	
+	func check() -> bool:
+		if _should_jump:
+			_raise_state_exit()
+			return true
+		return false
+	
+	
+	func _on_jump_change(should_jump: bool) -> void:
+		_should_jump = should_jump

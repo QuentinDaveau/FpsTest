@@ -9,11 +9,16 @@ func _init(controller: PlayerController).(controller) -> void:
 
 func _setup_state(controller: PlayerController) -> void:
 	_identifier = "Jump"
+	# TEMP: Jump impulse value and acceleration will be set in a parameters file
 	_actions = [
-		MovementStateHelper.SetAccelerationAction.new(controller, 0.1),
+		MovementStateHelper.SetGroundAttachAction.new(controller, false),
+		MovementStateHelper.ApplyImpulseAction.new(controller, Vector3.UP * 5.0),
+		MovementStateHelper.SetAccelerationAction.new(controller, 0.05),
 	]
 	_transitions = [
-		MovementStateHelper.TransitionAirToGround(controller)
+#		MovementStateHelper.TransitionAirToGround.new(controller),
+		MovementStateHelper.TransitionToFall.new(controller),
+		MovementStateHelper.TransitionAirToSlip.new(controller)
 	]
 
 

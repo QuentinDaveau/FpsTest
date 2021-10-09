@@ -3,7 +3,7 @@ class_name InputListener
 
 
 # TEMP: Should be moved somewhere else and is duplicated in input.gd
-enum TYPE {VIEW, MOTION, SHOOT}
+enum TYPE {VIEW, MOTION, SHOOT, JUMP, CROUCH}
 
 signal input(value)
 

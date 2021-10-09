@@ -11,6 +11,7 @@ updated.
 # cyclic dependency error
 var _target_character: KinematicBody
 var _residual_velocity: Vector3 = Vector3.ZERO
+var _attach_to_ground: bool = true
 
 
 func _init(target_character: KinematicBody) -> void:
@@ -23,9 +24,15 @@ func update(delta: float) -> void:
 
 
 
+func set_ground_attach(attach_to_ground: bool) -> void:
+	_attach_to_ground = attach_to_ground
+
+
+
 func apply_motion(velocity: Vector3) -> void:
-	_residual_velocity = _target_character.move_and_slide_with_snap(velocity, -_target_character.get_floor_normal() * 2.0, Vector3.UP, true)
-#	_residual_velocity = _target_character.move_and_slide(velocity, Vector3.UP, true, 4)
+	# TEMP: Floor normal multiplier will be set in paramters file
+	var ground_attach := -_target_character.get_floor_normal() * 2.0 if _attach_to_ground else Vector3.ZERO
+	_residual_velocity = _target_character.move_and_slide_with_snap(velocity, ground_attach, Vector3.UP, true)
 
 
 

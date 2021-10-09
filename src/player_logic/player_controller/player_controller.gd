@@ -10,10 +10,10 @@ var _camera_forward: Vector3 = Vector3.ZERO
 var _relative_direction: Vector2 = Vector2.ZERO
 var _relative_velocity: Vector3 = Vector3.ZERO
 var _move_speed: float = 0.0
-var _follow_floor: bool = true
 
 # TEMP: lerp value will be defined in an acceleration parameter in a "parameters" file
 var _move_acceleration := 0.0
+var _impulse := Vector3.ZERO
 
 
 
@@ -22,11 +22,15 @@ func _init(target_character: KinematicBody).(target_character) -> void:
 
 
 
-func move(relative_direction: Vector2, move_speed: float, follow_floor: bool = true) -> void:
+func move(relative_direction: Vector2, move_speed: float) -> void:
 	_move_speed = move_speed
 	_relative_direction = relative_direction
-	_follow_floor = follow_floor
 	_relative_velocity = _get_forward_velocity()
+
+
+
+func impulse(impulse_vector: Vector3) -> void:
+	_impulse = impulse_vector
 
 
 
@@ -36,14 +40,16 @@ func update(delta: float) -> void:
 	new_velocity.x = lerp(new_velocity.x, _relative_velocity.x, _move_acceleration)
 	new_velocity.z = lerp(new_velocity.z, _relative_velocity.z, _move_acceleration)
 	
-	if _follow_floor and _target_character.get_floor_normal():
+	if _attach_to_ground and _target_character.get_floor_normal():
 		new_velocity = _add_gravity_to(new_velocity, delta, -_target_character.get_floor_normal())
-		new_velocity = new_velocity.slide(_target_character.get_floor_normal())
+		new_velocity = Plane(_target_character.get_floor_normal(), 0.0).project(new_velocity)
+#		new_velocity = new_velocity.slide(_target_character.get_floor_normal())
 	else:
 		new_velocity = _add_gravity_to(new_velocity, delta)
 	
-	
+	new_velocity = _add_impulse_to(new_velocity)
 	apply_motion(new_velocity)
+	print(new_velocity.length())
 	.update(delta)
 
 
@@ -63,6 +69,22 @@ func _get_forward_velocity() -> Vector3:
 # TEMP: Arbitrary gravity value. It will be then set in a "parameters" file
 func _add_gravity_to(velocity_vector: Vector3, delta: float, gravity_vector: Vector3 = Vector3.DOWN) -> Vector3:
 	return velocity_vector + gravity_vector.normalized() * 9.8 * delta
+
+
+
+func _add_impulse_to(velocity_vector: Vector3) -> Vector3:
+	if _impulse:
+		velocity_vector = _max_a_vector_by_b(velocity_vector, _impulse)
+		_impulse = Vector3.ZERO
+	return velocity_vector
+
+
+
+func _max_a_vector_by_b(a: Vector3, b: Vector3) -> Vector3:
+	a.x = a.x if b.x == 0 or (sign(a.x) == sign(b.x) and a.x > b.x) else b.x
+	a.y = a.y if b.y == 0 or (sign(a.y) == sign(b.y) and a.y > b.y) else b.y
+	a.z = a.z if b.z == 0 or (sign(a.z) == sign(b.z) and a.z > b.z) else b.z
+	return a
 
 
 

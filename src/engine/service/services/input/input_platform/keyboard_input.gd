@@ -22,6 +22,8 @@ func _unhandled_input(event: InputEvent) -> void:
 			return
 		if event.is_action("ui_select"):
 			emit_signal("input_received", TYPE.JUMP, event.pressed)
+		if event.is_action("ui_shift"):
+			emit_signal("input_received", TYPE.RUN, event.pressed)
 
 
 

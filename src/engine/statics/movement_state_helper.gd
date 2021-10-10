@@ -32,7 +32,7 @@ class IdleAction:
 	
 	
 	func enter() -> void:
-		_controller.move(Vector2.ZERO, 0.0)
+		_controller.move(Vector2.ZERO)
 
 
 
@@ -69,7 +69,7 @@ class MoveAction:
 	# TEMP: the move value will be fetched from a "parameters" file
 	func update() -> void:
 		if _motion_updated:
-			_controller.move(_motion, 10.0)
+			_controller.move(_motion)
 	
 	
 	func _on_motion_change(motion_value: Vector2) -> void:
@@ -84,13 +84,29 @@ class SetAccelerationAction:
 	var _acceleration := 0.0
 	
 	
-	#TEMP: Ensure that the injected acceleration value comes from a parameters file
+	# TEMP: Ensure that the injected acceleration value comes from a parameters file
 	func _init(controller: PlayerController, acceleration_value: float).(controller) -> void:
 		_acceleration = acceleration_value
 	
 	
 	func enter() -> void:
 		_controller.set_acceleration(_acceleration)
+
+
+
+class SetSpeedAction:
+	extends MovementAction
+	
+	var _speed := 0.0
+	
+	
+	# TEMP: Ensure that the injected acceleration value comes from a parameters file
+	func _init(controller: PlayerController, speed_value: float).(controller) -> void:
+		_speed = speed_value
+	
+	
+	func enter() -> void:
+		_controller.set_max_speed(_speed)
 
 
 
@@ -162,6 +178,60 @@ class TransitionToIdle:
 	
 	func _on_motion_change(motion_value: Vector2) -> void:
 		_motion_value = motion_value
+
+
+
+class TransitionToRun:
+	extends MovementTransition
+	
+	var _listener: InputListener
+	var _should_run: bool = false
+	
+	
+	func _init(controller: PlayerController).(controller) -> void:
+		_listener = InputListener.new(self, "_on_run_change", InputListener.TYPE.RUN)
+	
+	
+	func get_next_state() -> String:
+		return "Run"
+	
+	
+	func check() -> bool:
+		if _should_run:
+			_raise_state_exit()
+			return true
+		return false
+	
+	
+	func _on_run_change(should_run: bool) -> void:
+		_should_run = should_run
+
+
+
+class TransitionRunToWalk:
+	extends MovementTransition
+	
+	var _listener: InputListener
+	var _should_stop_run: bool = false
+	
+	
+	func _init(controller: PlayerController).(controller) -> void:
+		_listener = InputListener.new(self, "_on_run_change", InputListener.TYPE.RUN)
+	
+	
+	func get_next_state() -> String:
+		return "Walk"
+	
+	
+	func check() -> bool:
+		if _should_stop_run:
+			_raise_state_exit()
+			return true
+		return false
+	
+	
+	func _on_run_change(should_run: bool) -> void:
+		_should_stop_run = not should_run
 
 
 

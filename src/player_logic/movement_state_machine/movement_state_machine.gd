@@ -51,7 +51,7 @@ func _enter_state(state: MovementState) -> void:
 
 
 func _on_state_exit(next_state: String) -> void:
-	Service.fetch(Service.TYPE.LOG).output(Logger.LEVEL.INFO, self, "Transitioning to " + next_state + " from " + _current_state.get_identifier())
+	Service.fetch(Service.TYPE.LOG).output(Logger.LEVEL.INFO, self, "Transitioning from " + _current_state.get_identifier() + " to " + next_state)
 	for transition in _current_state.get_transitions():
 		transition.disconnect("state_exit", self, "_on_state_exit")
 	_current_state.exit()

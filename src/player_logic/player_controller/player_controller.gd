@@ -22,8 +22,7 @@ func _init(target_character: KinematicBody).(target_character) -> void:
 
 
 
-func move(relative_direction: Vector2, move_speed: float) -> void:
-	_move_speed = move_speed
+func move(relative_direction: Vector2) -> void:
 	_relative_direction = relative_direction
 	_relative_velocity = _get_forward_velocity()
 
@@ -37,8 +36,8 @@ func impulse(impulse_vector: Vector3) -> void:
 func update(delta: float) -> void:
 	var new_velocity := _residual_velocity
 	
-	new_velocity.x = lerp(new_velocity.x, _relative_velocity.x, _move_acceleration)
-	new_velocity.z = lerp(new_velocity.z, _relative_velocity.z, _move_acceleration)
+	new_velocity.x = lerp(new_velocity.x, _relative_velocity.x, _move_acceleration * delta)
+	new_velocity.z = lerp(new_velocity.z, _relative_velocity.z, _move_acceleration * delta)
 	
 	if _attach_to_ground and _target_character.get_floor_normal():
 		new_velocity = _add_gravity_to(new_velocity, delta, -_target_character.get_floor_normal())
@@ -49,13 +48,17 @@ func update(delta: float) -> void:
 	
 	new_velocity = _add_impulse_to(new_velocity)
 	apply_motion(new_velocity)
-	print(new_velocity.length())
 	.update(delta)
 
 
 
 func set_acceleration(acceleration: float) -> void:
 	_move_acceleration = acceleration
+
+
+
+func set_max_speed(speed: float) -> void:
+	_move_speed = speed
 
 
 

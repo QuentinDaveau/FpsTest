@@ -36,6 +36,20 @@ class IdleAction:
 
 
 
+class SetHeightAction:
+	extends MovementAction
+	
+	var _height_value: float
+	
+	
+	func _init(controller: PlayerController, height_value: float).(controller) -> void:
+		_height_value = height_value
+	
+	
+	func enter() -> void:
+		_controller.set_collision_height(_height_value)
+
+
 
 # -- Air --
 class ApplyImpulseAction:
@@ -339,3 +353,111 @@ class TransitionToJump:
 	
 	func _on_jump_change(should_jump: bool) -> void:
 		_should_jump = should_jump
+
+
+
+class TransitionToCrouch:
+	extends MovementTransition
+	
+	var _listener: InputListener
+	var _should_crouch: bool = false
+	
+	
+	func _init(controller: PlayerController).(controller) -> void:
+		_listener = InputListener.new(self, "_on_crouch_change", InputListener.TYPE.CROUCH)
+	
+	
+	func get_next_state() -> String:
+		return "CrouchIdle"
+	
+	
+	func check() -> bool:
+		if _should_crouch:
+			_raise_state_exit()
+			return true
+		return false
+	
+	
+	func _on_crouch_change(should_crouch: bool) -> void:
+		_should_crouch = should_crouch
+
+
+# TODO: Add stand check to not un-crouch in walls
+class TransitionToStand:
+	extends MovementTransition
+	
+	var _listener: InputListener
+	var _should_stand: bool = false
+	
+	
+	func _init(controller: PlayerController).(controller) -> void:
+		_listener = InputListener.new(self, "_on_crouch_change", InputListener.TYPE.CROUCH)
+	
+	
+	func get_next_state() -> String:
+		return "Idle"
+	
+	
+	func check() -> bool:
+		if _should_stand:
+			_raise_state_exit()
+			return true
+		return false
+	
+	
+	func _on_crouch_change(should_crouch: bool) -> void:
+		_should_stand = not should_crouch
+
+
+
+class TransitionCrouchIdleToMove:
+	extends MovementTransition
+	
+	var _listener: InputListener
+	var _motion_value: Vector2
+	
+	
+	func _init(controller: PlayerController).(controller) -> void:
+		_listener = InputListener.new(self, "_on_motion_change", InputListener.TYPE.MOTION)
+	
+	
+	func get_next_state() -> String:
+		return "CrouchMove"
+	
+	
+	func check() -> bool:
+		if _motion_value:
+			_raise_state_exit()
+			return true
+		return false
+	
+	
+	func _on_motion_change(motion_value: Vector2) -> void:
+		_motion_value = motion_value
+
+
+
+class TransitionCrouchMoveToIdle:
+	extends MovementTransition
+	
+	var _listener: InputListener
+	var _motion_value: Vector2
+	
+	
+	func _init(controller: PlayerController).(controller) -> void:
+		_listener = InputListener.new(self, "_on_motion_change", InputListener.TYPE.MOTION)
+	
+	
+	func get_next_state() -> String:
+		return "CrouchIdle"
+	
+	
+	func check() -> bool:
+		if not _motion_value:
+			_raise_state_exit()
+			return true
+		return false
+	
+	
+	func _on_motion_change(motion_value: Vector2) -> void:
+		_motion_value = motion_value

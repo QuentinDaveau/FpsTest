@@ -36,6 +36,22 @@ func apply_motion(velocity: Vector3) -> void:
 
 
 
+# TODO: find a better way to get the collider ?
+func set_collision_height(height: float) -> void:
+	for owner_id in _target_character.get_shape_owners():
+		for shape_id in _target_character.shape_owner_get_shape_count(owner_id):
+			var shape: Shape = _target_character.shape_owner_get_shape(owner_id, shape_id)
+			if shape is CapsuleShape:
+				shape = shape as CapsuleShape
+				var true_capsule_height := clamp(height - (2.0 * shape.radius), 0.0, 999.0)
+				if shape.height == true_capsule_height: 
+					return
+				shape.height = true_capsule_height
+				_target_character.shape_owner_get_owner(owner_id).translation.y = (shape.height / 2.0) + shape.radius
+				print("shape height: " + String(shape.height) + " shape translation: " + String(_target_character.shape_owner_get_owner(owner_id).translation.y))
+
+
+
 func is_grounded() -> bool:
 	return _target_character.is_on_floor()
 

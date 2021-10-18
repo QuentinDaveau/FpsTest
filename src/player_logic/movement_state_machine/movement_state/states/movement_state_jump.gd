@@ -14,6 +14,7 @@ func _setup_state(controller: PlayerController) -> void:
 		MovementStateHelper.SetGroundAttachAction.new(controller, false),
 		MovementStateHelper.ApplyImpulseAction.new(controller, Vector3.UP * 5.0),
 		MovementStateHelper.SetAccelerationAction.new(controller, 0.5),
+		MovementStateHelper.SetHeightAction.new(controller, 1.8),
 	]
 	_transitions = [
 #		MovementStateHelper.TransitionAirToGround.new(controller),

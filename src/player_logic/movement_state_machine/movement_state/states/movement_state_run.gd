@@ -14,6 +14,7 @@ func _setup_state(controller: PlayerController) -> void:
 		MovementStateHelper.SetGroundAttachAction.new(controller, true),
 		MovementStateHelper.SetAccelerationAction.new(controller, 8.0),
 		MovementStateHelper.SetSpeedAction.new(controller, 20.0),
+		MovementStateHelper.SetHeightAction.new(controller, 1.8),
 		MovementStateHelper.MoveAction.new(controller)
 	]
 	_transitions = [
@@ -22,6 +23,7 @@ func _setup_state(controller: PlayerController) -> void:
 		MovementStateHelper.TransitionToJump.new(controller),
 		MovementStateHelper.TransitionRunToWalk.new(controller),
 		MovementStateHelper.TransitionToIdle.new(controller),
+		MovementStateHelper.TransitionToCrouch.new(controller),
 	]
 
 

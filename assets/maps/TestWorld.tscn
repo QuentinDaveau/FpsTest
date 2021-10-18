@@ -41,7 +41,7 @@ transform = Transform( 1, 0, 0, 0, 3.1551, 0.866025, 0, -5.46479, 0.5, 2.06006, 
 transform = Transform( 1, 0, 0, 0, 3.03912, 0.965926, 0, -11.3422, 0.258819, 4.06006, -0.0300579, 8.1245 )
 
 [node name="Block3" parent="." instance=ExtResource( 1 )]
-transform = Transform( 7.01, 0, 0, 0, -2.20305e-07, 1, 0, -5.04, -4.37114e-08, 0, 2.99659, -8 )
+transform = Transform( 7.01, 0, 0, 0, -2.20305e-07, 1.5, 0, -5.04, -6.55671e-08, 0, 2.49068, -8 )
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource( 2 )

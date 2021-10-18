@@ -9,7 +9,7 @@ func _ready() -> void:
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 
 
-
+# TEMP: Will have to rename input mapping to more obvious names
 func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventMouseMotion:
 		emit_signal("input_received", TYPE.VIEW, event.relative * SENSITIVITY)
@@ -24,6 +24,8 @@ func _unhandled_input(event: InputEvent) -> void:
 			emit_signal("input_received", TYPE.JUMP, event.pressed)
 		if event.is_action("ui_shift"):
 			emit_signal("input_received", TYPE.RUN, event.pressed)
+		if event.is_action("ui_ctrl"):
+			emit_signal("input_received", TYPE.CROUCH, event.pressed)
 
 
 

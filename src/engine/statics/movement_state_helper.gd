@@ -461,3 +461,24 @@ class TransitionCrouchMoveToIdle:
 	
 	func _on_motion_change(motion_value: Vector2) -> void:
 		_motion_value = motion_value
+
+
+# Transitions conditionals
+
+
+class ConditionHasHeadSpace:
+	extends MovementTransitionConditional
+	
+	var _listener: InputListener
+	var _raycaster: Raycaster
+	var _check_height: float
+	
+	
+	func _init(controller: PlayerController, check_height: float, transition: MovementTransition).(controller, transition) -> void:
+		_check_height = check_height
+	
+	
+	func _check_conditional() -> bool:
+		return not _controller.is_cast_colliding(Vector3.UP, _check_height, 1.0)
+
+

@@ -16,13 +16,21 @@ func _setup_state(controller: PlayerController) -> void:
 		MovementStateHelper.SetSpeedAction.new(controller, 0.0),
 		MovementStateHelper.SetHeightAction.new(controller, 0.9)
 	]
+	# TEMP: Head space check distance will be set in params file
 	_transitions = [
-		MovementStateHelper.TransitionToSlip.new(controller),
-		MovementStateHelper.TransitionToFall.new(controller),
+		MovementStateHelper.ConditionHasHeadSpace.new(
+			controller, 1.0, MovementStateHelper.TransitionToSlip.new(controller)),
+		MovementStateHelper.ConditionHasHeadSpace.new(
+			controller, 1.0, MovementStateHelper.TransitionToFall.new(controller)),
+			
 		MovementStateHelper.TransitionCrouchIdleToMove.new(controller),
-		MovementStateHelper.TransitionToStand.new(controller),
-		MovementStateHelper.TransitionToRun.new(controller),
-		MovementStateHelper.TransitionToJump.new(controller),
+		
+		MovementStateHelper.ConditionHasHeadSpace.new(
+			controller, 1.0, MovementStateHelper.TransitionToStand.new(controller)),
+		MovementStateHelper.ConditionHasHeadSpace.new(
+			controller, 1.0, MovementStateHelper.TransitionToRun.new(controller)),
+		MovementStateHelper.ConditionHasHeadSpace.new(
+			controller, 1.0, MovementStateHelper.TransitionToJump.new(controller)),
 	]
 
 

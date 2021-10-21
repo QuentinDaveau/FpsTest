@@ -18,12 +18,19 @@ func _setup_state(controller: PlayerController) -> void:
 		MovementStateHelper.MoveAction.new(controller),
 	]
 	_transitions = [
-		MovementStateHelper.TransitionToSlip.new(controller),
-		MovementStateHelper.TransitionToFall.new(controller),
+		MovementStateHelper.ConditionHasHeadSpace.new(
+			controller, 1.0, MovementStateHelper.TransitionToSlip.new(controller)),
+		MovementStateHelper.ConditionHasHeadSpace.new(
+			controller, 1.0, MovementStateHelper.TransitionToFall.new(controller)),
+			
 		MovementStateHelper.TransitionCrouchMoveToIdle.new(controller),
-		MovementStateHelper.TransitionToStand.new(controller),
-		MovementStateHelper.TransitionToRun.new(controller),
-		MovementStateHelper.TransitionToJump.new(controller),
+		
+		MovementStateHelper.ConditionHasHeadSpace.new(
+			controller, 1.0, MovementStateHelper.TransitionToStand.new(controller)),
+		MovementStateHelper.ConditionHasHeadSpace.new(
+			controller, 1.0, MovementStateHelper.TransitionToRun.new(controller)),
+		MovementStateHelper.ConditionHasHeadSpace.new(
+			controller, 1.0, MovementStateHelper.TransitionToJump.new(controller)),
 		
 	]
 

@@ -23,7 +23,7 @@ func _setup_state(controller: PlayerController) -> void:
 		MovementStateHelper.TransitionToJump.new(controller),
 		MovementStateHelper.TransitionRunToWalk.new(controller),
 		MovementStateHelper.TransitionToIdle.new(controller),
-		MovementStateHelper.TransitionToCrouch.new(controller),
+		MovementStateHelper.TransitionRunToCrouch.new(controller),
 	]
 
 

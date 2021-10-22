@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://assets/characters/character/Character.tscn" type="PackedScene" id=1]
 [ext_resource path="res://src/player_logic/camera_stack/camera_stack.gd" type="Script" id=2]
@@ -13,14 +13,14 @@
 [ext_resource path="res://src/player_logic/movement_state_machine/movement_state/states/movement_state_run.gd" type="Script" id=11]
 [ext_resource path="res://src/player_logic/movement_state_machine/movement_state/states/movement_state_crouch_idle.gd" type="Script" id=12]
 [ext_resource path="res://src/player_logic/movement_state_machine/movement_state/states/movement_state_crouch_move.gd" type="Script" id=13]
+[ext_resource path="res://src/player_logic/camera_stack/camera_behaviors/behaviors/camera_crouch.gd" type="Script" id=14]
 
 [node name="Player" instance=ExtResource( 1 )]
 script = ExtResource( 5 )
 
 [node name="CameraStack" type="Spatial" parent="." index="1"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0 )
 script = ExtResource( 2 )
-behaviors = [ ExtResource( 3 ) ]
+behaviors = [ ExtResource( 14 ), ExtResource( 3 ) ]
 
 [node name="MovementStateMachine" type="Node" parent="." index="2"]
 script = ExtResource( 4 )

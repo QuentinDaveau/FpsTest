@@ -42,11 +42,11 @@ func _physics_process(delta: float) -> void:
 
 
 func _enter_state(state: MovementState) -> void:
-	emit_signal("player_state_changed", state.get_identifier())
 	_current_state = state
 	for transition in _current_state.get_transitions():
 		transition.connect("state_exit", self, "_on_state_exit", [transition.get_next_state()])
-	_current_state.enter()
+	if _current_state.enter():
+		emit_signal("player_state_changed", state.get_identifier())
 
 
 

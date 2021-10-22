@@ -23,12 +23,13 @@ func _init(controller: PlayerController).() -> void:
 
 
 
-func enter() -> void:
+func enter() -> bool:
 	for transition in _transitions:
 		if transition.check():
-			return
+			return false
 	for action in _actions:
 		action.enter()
+	return true
 
 
 
@@ -52,6 +53,7 @@ func get_transitions() -> Array:
 
 
 
+# TEMP: Magic string used for identifier, will have to be replaced by an enum at some point
 func get_identifier() -> String:
 	return _identifier
 

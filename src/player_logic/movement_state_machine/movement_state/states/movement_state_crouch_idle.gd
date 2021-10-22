@@ -28,8 +28,6 @@ func _setup_state(controller: PlayerController) -> void:
 		MovementStateHelper.ConditionHasHeadSpace.new(
 			controller, 1.0, MovementStateHelper.TransitionToStand.new(controller)),
 		MovementStateHelper.ConditionHasHeadSpace.new(
-			controller, 1.0, MovementStateHelper.TransitionToRun.new(controller)),
-		MovementStateHelper.ConditionHasHeadSpace.new(
 			controller, 1.0, MovementStateHelper.TransitionToJump.new(controller)),
 	]
 

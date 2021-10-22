@@ -382,6 +382,34 @@ class TransitionToCrouch:
 		_should_crouch = should_crouch
 
 
+# Same as TransitionToCrouch, but is valid only on key press, and not on key hold
+class TransitionRunToCrouch:
+	extends MovementTransition
+	
+	var _listener: InputListener
+	var _should_crouch: bool = false
+	
+	
+	func _init(controller: PlayerController).(controller) -> void:
+		_listener = InputListener.new(self, "_on_crouch_change", InputListener.TYPE.CROUCH)
+	
+	
+	func get_next_state() -> String:
+		return "CrouchIdle"
+	
+	
+	func check() -> bool:
+		if _should_crouch:
+			_should_crouch = false
+			_raise_state_exit()
+			return true
+		return false
+	
+	
+	func _on_crouch_change(should_crouch: bool) -> void:
+		_should_crouch = should_crouch
+
+
 # TODO: Add stand check to not un-crouch in walls
 class TransitionToStand:
 	extends MovementTransition

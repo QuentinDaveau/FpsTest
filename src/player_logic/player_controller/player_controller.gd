@@ -42,7 +42,6 @@ func update(delta: float) -> void:
 	if _attach_to_ground and _target_character.get_floor_normal():
 		new_velocity = _add_gravity_to(new_velocity, delta, -_target_character.get_floor_normal())
 		new_velocity = Plane(_target_character.get_floor_normal(), 0.0).project(new_velocity)
-#		new_velocity = new_velocity.slide(_target_character.get_floor_normal())
 	else:
 		new_velocity = _add_gravity_to(new_velocity, delta)
 	

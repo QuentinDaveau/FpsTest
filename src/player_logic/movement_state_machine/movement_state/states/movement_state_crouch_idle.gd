@@ -13,7 +13,7 @@ func _setup_state(controller: PlayerController) -> void:
 	_actions = [
 		MovementStateHelper.SetGroundAttachAction.new(controller, true),
 		MovementStateHelper.SetAccelerationAction.new(controller, 15.0),
-		MovementStateHelper.SetSpeedAction.new(controller, 0.0),
+		MovementStateHelper.SetMaxSpeedAction.new(controller, 0.0),
 		MovementStateHelper.SetHeightAction.new(controller, 0.9)
 	]
 	# TEMP: Head space check distance will be set in params file

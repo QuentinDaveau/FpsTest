@@ -108,19 +108,19 @@ class SetAccelerationAction:
 
 
 
-class SetSpeedAction:
+class SetMaxSpeedAction:
 	extends MovementAction
 	
-	var _speed := 0.0
+	var _max_speed := 0.0
 	
 	
 	# TEMP: Ensure that the injected acceleration value comes from a parameters file
-	func _init(controller: PlayerController, speed_value: float).(controller) -> void:
-		_speed = speed_value
+	func _init(controller: PlayerController, max_speed_value: float).(controller) -> void:
+		_max_speed = max_speed_value
 	
 	
 	func enter() -> void:
-		_controller.set_max_speed(_speed)
+		_controller.set_max_speed(_max_speed)
 
 
 
@@ -410,7 +410,7 @@ class TransitionRunToCrouch:
 		_should_crouch = should_crouch
 
 
-# TODO: Add stand check to not un-crouch in walls
+
 class TransitionToStand:
 	extends MovementTransition
 	
@@ -497,8 +497,6 @@ class TransitionCrouchMoveToIdle:
 class ConditionHasHeadSpace:
 	extends MovementTransitionConditional
 	
-	var _listener: InputListener
-	var _raycaster: Raycaster
 	var _check_height: float
 	
 	

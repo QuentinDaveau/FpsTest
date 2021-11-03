@@ -13,7 +13,7 @@ func _setup_state(controller: PlayerController) -> void:
 	_actions = [
 		MovementStateHelper.SetGroundAttachAction.new(controller, true),
 		MovementStateHelper.SetAccelerationAction.new(controller, 15.0),
-		MovementStateHelper.SetSpeedAction.new(controller, 5.0),
+		MovementStateHelper.SetMaxSpeedAction.new(controller, 5.0),
 		MovementStateHelper.SetHeightAction.new(controller, 0.9),
 		MovementStateHelper.MoveAction.new(controller),
 	]

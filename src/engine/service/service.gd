@@ -5,7 +5,8 @@ enum TYPE {
 	LOG,
 	SIGNAL,
 	FETCH_CHARACTER,
-	CAMERAS
+	CAMERAS,
+	ITEM
 }
 
 

@@ -1,9 +1,10 @@
 extends Object
-class_name Item
+class_name Slot
 
 """
-Class dedicated to hold an object. Is used as a wrapper in the inventory to
-handle the logic when picked or dropped (creation of specific object...)
+Generic Class dedicated to count items. Is used as a wrapper in the inventory to
+handle the logic when picked or dropped, and can be derived to handle different
+logics (creation of specific object...)
 """
 
 signal added_amount(added, new_amount)
@@ -11,15 +12,19 @@ signal removed_amount(removed, new_amount)
 signal emptied()
 signal filled()
 
-var _object: Object
+
+var _type: int
 var _amount: int
 var _max_amount: int
 var _unique: bool
+var _uid: int
 
 
 
-func _init(object: Object, amount: int, max_amount: int, unique: bool = false) -> void:
-	_object = object
+func _init(type: int, uid: int, amount: int, max_amount: int, unique: bool = false) -> void:
+	assert(amount <= max_amount)
+	_type = type
+	_uid = uid
 	_amount = amount
 	_max_amount = max_amount
 	_unique = unique
@@ -39,7 +44,7 @@ func add(quantity: int) -> int:
 
 
 
-func remove(quantity: int) -> int:
+func take(quantity: int) -> int:
 	var new_amount = _amount - quantity
 	var leftover = 0
 	if new_amount <= 0:
@@ -48,7 +53,7 @@ func remove(quantity: int) -> int:
 		emit_signal("emptied")
 	_amount = new_amount
 	emit_signal("removed_amount", quantity - leftover, _amount)
-	return leftover
+	return quantity - leftover
 
 
 
@@ -70,3 +75,18 @@ func get_amount() -> int:
 func is_full() -> bool:
 	return _amount == _max_amount
 
+
+
+func get_type() -> int:
+	return _type
+
+
+
+func get_uid() -> int:
+	return _uid
+
+
+
+# To be overriden
+func get_item():
+	pass

@@ -34,15 +34,35 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://src/character/character_controller/character_controller.gd"
 }, {
+"base": "Slot",
+"class": "DataSlot",
+"language": "GDScript",
+"path": "res://src/item_logic/inventory/slot/data_slot.gd"
+}, {
 "base": "Node",
 "class": "InputListener",
 "language": "GDScript",
 "path": "res://src/engine/service/services/input/input_listener/input_listener.gd"
 }, {
+"base": "Slot",
+"class": "InstanceSlot",
+"language": "GDScript",
+"path": "res://src/item_logic/inventory/slot/instance_slot.gd"
+}, {
 "base": "Object",
+"class": "Inventory",
+"language": "GDScript",
+"path": "res://src/item_logic/inventory/inventory.gd"
+}, {
+"base": "Node",
 "class": "Item",
 "language": "GDScript",
-"path": "res://src/character/inventory/item/item.gd"
+"path": "res://src/engine/service/services/items.gd"
+}, {
+"base": "Object",
+"class": "ItemDB",
+"language": "GDScript",
+"path": "res://data/item_db.gd"
 }, {
 "base": "Node",
 "class": "Logger",
@@ -100,9 +120,9 @@ _global_script_classes=[ {
 "path": "res://src/engine/utility/physics/raycaster.gd"
 }, {
 "base": "Object",
-"class": "inventory",
+"class": "Slot",
 "language": "GDScript",
-"path": "res://src/character/inventory/inventory.gd"
+"path": "res://src/item_logic/inventory/slot/slot.gd"
 } ]
 _global_script_class_icons={
 "CameraBehavior": "",
@@ -110,8 +130,12 @@ _global_script_class_icons={
 "Cameras": "",
 "Character": "",
 "CharacterController": "",
+"DataSlot": "",
 "InputListener": "",
+"InstanceSlot": "",
+"Inventory": "",
 "Item": "",
+"ItemDB": "",
 "Logger": "",
 "MovementAction": "",
 "MovementState": "",
@@ -123,7 +147,7 @@ _global_script_class_icons={
 "PlayerController": "",
 "PlayerSpawner": "res://resources/editor/custom_classes_icons/player_spawner.svg",
 "Raycaster": "",
-"inventory": ""
+"Slot": ""
 }
 
 [application]

@@ -7,7 +7,8 @@ const nodes_to_load := [
 	preload("res://src/engine/service/services/character_fetcher.gd"),
 	preload("res://src/engine/service/services/input/input_platform/keyboard_input.gd"),
 	preload("res://src/engine/service/services/cameras.gd"),
-	preload("res://src/engine/service/services/debug/state_ui.gd")
+	preload("res://src/engine/service/services/debug/state_ui.gd"),
+	preload("res://src/engine/service/services/items.gd"),
 ]
 
 

@@ -13,52 +13,58 @@ signal emptied()
 signal filled()
 
 
-var _type: int
-var _amount: int
-var _max_amount: int
-var _unique: bool
+
 var _uid: int
+var _max_amount: int
+var _item: ItemContainer
 
 
 
-func _init(type: int, uid: int, amount: int, max_amount: int, unique: bool = false) -> void:
-	assert(amount <= max_amount)
-	_type = type
+func _init(uid: int, max_amount: int) -> void:
+	assert(max_amount > 0, "An inventory slot has to be able to contain at least one item!")
 	_uid = uid
-	_amount = amount
 	_max_amount = max_amount
-	_unique = unique
 
 
 
-func add(quantity: int) -> int:
-	var new_amount = _amount + quantity
-	var leftover = 0
+# TODO: try to clean this mess
+func add(new_item: ItemContainer) -> ItemContainer:
+	if has_item() and _item.get_type() != new_item.get_type():
+		return new_item
+	var quantity_to_add := new_item.get_amount()
+	var leftover := 0
+	var new_amount := quantity_to_add + (_item.get_amount() if has_item() else 0)
 	if new_amount > _max_amount:
 		leftover = new_amount - _max_amount
 		new_amount = _max_amount
 		emit_signal("filled")
-	_amount = new_amount
-	emit_signal("added_amount", quantity - leftover, _amount)
-	return leftover
+	var old_item := _set_or_swap_item(new_item, new_amount)
+	emit_signal("added_amount", quantity_to_add - leftover, new_amount)
+	if old_item and leftover:
+		old_item.set_amount(leftover)
+		return old_item
+	return null
 
 
-
-func take(quantity: int) -> int:
-	var new_amount = _amount - quantity
-	var leftover = 0
+# TODO: try to clean this mess
+func take(quantity: int) -> ItemContainer:
+	assert(quantity > 0 and has_item())
+	var new_amount := _item.get_amount() - quantity
+	var leftover := 0
 	if new_amount <= 0:
 		leftover = - new_amount
 		new_amount = 0
 		emit_signal("emptied")
-	_amount = new_amount
-	emit_signal("removed_amount", quantity - leftover, _amount)
-	return quantity - leftover
-
-
-
-func is_unique() -> bool:
-	return _unique
+	emit_signal("removed_amount", quantity - leftover, new_amount)
+	if new_amount > 0:
+		var old_item = _item
+		old_item.set_amount(quantity)
+		_item = _create_item(old_item.get_type(), new_amount)
+		return old_item
+	else:
+		var item = _item
+		_item = null
+		return item
 
 
 
@@ -68,25 +74,47 @@ func get_max_amount() -> int:
 
 
 func get_amount() -> int:
-	return _amount
+	return _item.get_amount() if has_item() else 0
 
 
 
 func is_full() -> bool:
-	return _amount == _max_amount
+	return _item.get_amount() == _max_amount if has_item() else false
 
 
 
-func get_type() -> int:
-	return _type
+func can_receive(item_type: int) -> bool:
+	return not has_item() or (_item.get_type() == item_type and not is_full())
 
 
 
-func get_uid() -> int:
-	return _uid
+func has_item_type(item_type: int) -> bool:
+	return has_item() and item_type == _item.get_type()
 
 
 
-# To be overriden
+func has_item() -> bool:
+	return _item != null or not _item.is_queued_for_deletion()
+
+
+
 func get_item():
-	pass
+	return _item
+
+
+
+
+
+
+
+func _set_or_swap_item(new_item: ItemContainer, amount: int) -> ItemContainer:
+	var old_item := _item
+	if not has_item() or _item != new_item:
+		_item = new_item
+	_item.set_amount(amount)
+	return old_item
+
+
+
+func _create_item(item_type: int, amount: int) -> ItemContainer:
+	return Service.fetch(Service.TYPE.ITEM).generate(item_type, amount)

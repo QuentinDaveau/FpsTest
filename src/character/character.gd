@@ -19,3 +19,10 @@ func register_inventory(inventory: Inventory) -> void:
 
 func get_controller() -> CharacterController:
 	return _controller
+
+
+
+func get_inventory() -> Inventory:
+	return _inventory
+
+

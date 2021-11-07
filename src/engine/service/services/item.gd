@@ -18,9 +18,9 @@ func _init() -> void:
 
 
 func generate(container_type: int, amount: int = 1) -> ItemContainer:
-	if not ItemDB.ID.has(container_type):
+	if not ItemDB.TYPE.values().has(container_type):
 		return null
-	var properties: ItemDB.ItemProperties = ItemDB.ITEM_DATA.get(container_type)
+	var properties: ItemDB.ItemProperties = ItemDB.get_item_data(container_type)
 	var container := _create_container(container_type, properties, _get_instance(properties.class_path), amount)
 	return container
 

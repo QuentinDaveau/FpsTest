@@ -14,22 +14,21 @@ signal filled()
 
 
 
-var _uid: int
+var _uid: int = -1
 var _max_amount: int
 var _item: ItemContainer
 
 
 
-func _init(uid: int, max_amount: int) -> void:
+func _init(max_amount: int) -> void:
 	assert(max_amount > 0, "An inventory slot has to be able to contain at least one item!")
-	_uid = uid
 	_max_amount = max_amount
 
 
 
 # TODO: try to clean this mess
 func add(new_item: ItemContainer) -> ItemContainer:
-	if has_item() and _item.get_type() != new_item.get_type():
+	if not can_receive(new_item):
 		return new_item
 	var quantity_to_add := new_item.get_amount()
 	var leftover := 0
@@ -40,9 +39,12 @@ func add(new_item: ItemContainer) -> ItemContainer:
 		emit_signal("filled")
 	var old_item := _set_or_swap_item(new_item, new_amount)
 	emit_signal("added_amount", quantity_to_add - leftover, new_amount)
-	if old_item and leftover:
-		old_item.set_amount(leftover)
-		return old_item
+	if leftover:
+		if not old_item:
+			return _create_item(new_item.get_type(), leftover)
+		else:
+			old_item.set_amount(leftover)
+			return old_item
 	return null
 
 
@@ -68,6 +70,12 @@ func take(quantity: int) -> ItemContainer:
 
 
 
+func set_uid(uid: int) -> void:
+	assert(_uid == -1 and uid >= 0)
+	_uid = uid
+
+
+
 func get_max_amount() -> int:
 	return _max_amount
 
@@ -83,8 +91,8 @@ func is_full() -> bool:
 
 
 
-func can_receive(item_type: int) -> bool:
-	return not has_item() or (_item.get_type() == item_type and not is_full())
+func can_receive(item: ItemContainer) -> bool:
+	return not has_item() or (_item.get_type() == item.get_type() and not is_full())
 
 
 
@@ -94,7 +102,7 @@ func has_item_type(item_type: int) -> bool:
 
 
 func has_item() -> bool:
-	return _item != null or not _item.is_queued_for_deletion()
+	return _item != null and not _item.is_queued_for_deletion()
 
 
 

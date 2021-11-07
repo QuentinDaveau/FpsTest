@@ -25,7 +25,7 @@ func _init(target_character: KinematicBody) -> void:
 
 # Have to wait readu() to initialize the caster, otherwise the character has no world yet
 func _on_target_ready() -> void:
-	_raycaster = Raycaster.new(_target_character.get_world(), _collider_shape.shape if _collider_shape else [])
+	_raycaster = Raycaster.new(_target_character.get_world(), [_collider_shape.shape] if _collider_shape else [])
 	_collider_shape = _get_shape_info()
 
 

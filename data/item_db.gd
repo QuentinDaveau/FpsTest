@@ -26,16 +26,19 @@ enum GROUP {
 
 
 
-var ITEM_DATA := {
-	TYPE.RIFLE: ItemProperties.new(GROUP.WEAPON, 1, true, ""),
-	TYPE.SHOTGUN: ItemProperties.new(GROUP.WEAPON, 1, true, ""),
-	TYPE.SNIPER: ItemProperties.new(GROUP.WEAPON, 1, true, ""),
-	TYPE.PISTOL: ItemProperties.new(GROUP.WEAPON, 1, true, ""),
-	TYPE.RIFLE_AMMO: ItemProperties.new(GROUP.AMMO, 99, false, ""),
-	TYPE.SHOTGUN_AMMO: ItemProperties.new(GROUP.AMMO, 99, false, ""),
-	TYPE.SNIPER_AMMO: ItemProperties.new(GROUP.AMMO, 99, false, ""),
-	TYPE.PISTOL_AMMO: ItemProperties.new(GROUP.AMMO, 99, false, ""),
-}
+# TEMP: Very dirty, to be able to use the item data list like a static variable
+static func get_item_data(item_type: int) -> ItemProperties:
+	var items_data := {
+	TYPE.RIFLE: ItemProperties.new(GROUP.WEAPON, 1, true, "res://assets/prototyping/block/Block.tscn"),
+	TYPE.SHOTGUN: ItemProperties.new(GROUP.WEAPON, 1, true, "res://assets/prototyping/block/Block.tscn"),
+	TYPE.SNIPER: ItemProperties.new(GROUP.WEAPON, 1, true, "res://assets/prototyping/block/Block.tscn"),
+	TYPE.PISTOL: ItemProperties.new(GROUP.WEAPON, 1, true, "res://assets/prototyping/block/Block.tscn"),
+	TYPE.RIFLE_AMMO: ItemProperties.new(GROUP.AMMO, 99, false, "res://assets/prototyping/block/Block.tscn"),
+	TYPE.SHOTGUN_AMMO: ItemProperties.new(GROUP.AMMO, 99, false, "res://assets/prototyping/block/Block.tscn"),
+	TYPE.SNIPER_AMMO: ItemProperties.new(GROUP.AMMO, 99, false, "res://assets/prototyping/block/Block.tscn"),
+	TYPE.PISTOL_AMMO: ItemProperties.new(GROUP.AMMO, 99, false, "res://assets/prototyping/block/Block.tscn"),
+	}
+	return items_data.get(item_type)
 
 
 

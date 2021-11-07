@@ -42,3 +42,7 @@ func get_type() -> int:
 func get_group() -> int:
 	return _group
 
+
+
+func get_item() -> Object:
+	return _item

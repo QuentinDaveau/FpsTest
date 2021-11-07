@@ -39,6 +39,16 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://src/item_logic/inventory/container/data_container.gd"
 }, {
+"base": "Inventory",
+"class": "ExpandingInventory",
+"language": "GDScript",
+"path": "res://src/item_logic/inventory/expanding_inventory.gd"
+}, {
+"base": "Slot",
+"class": "GroupSlot",
+"language": "GDScript",
+"path": "res://src/item_logic/inventory/slot/group_slot.gd"
+}, {
 "base": "Node",
 "class": "InputListener",
 "language": "GDScript",
@@ -68,6 +78,11 @@ _global_script_classes=[ {
 "class": "ItemDB",
 "language": "GDScript",
 "path": "res://data/item_db.gd"
+}, {
+"base": "Sprite3D",
+"class": "Label3D",
+"language": "GDScript",
+"path": "res://src/debug/label_3D.gd"
 }, {
 "base": "Node",
 "class": "Logger",
@@ -104,6 +119,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://src/player_logic/movement_state_machine/movement_state/movement_transition_conditional.gd"
 }, {
+"base": "Spatial",
+"class": "Pickable",
+"language": "GDScript",
+"path": "res://src/in_world_logic/pickable/pickable.gd"
+}, {
 "base": "Character",
 "class": "Player",
 "language": "GDScript",
@@ -124,15 +144,15 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://src/engine/utility/physics/raycaster.gd"
 }, {
-"base": "Inventory",
-"class": "RestrictedInventory",
-"language": "GDScript",
-"path": "res://src/item_logic/inventory/restricted_inventory.gd"
-}, {
 "base": "Object",
 "class": "Slot",
 "language": "GDScript",
 "path": "res://src/item_logic/inventory/slot/slot.gd"
+}, {
+"base": "Slot",
+"class": "TypeSlot",
+"language": "GDScript",
+"path": "res://src/item_logic/inventory/slot/type_slot.gd"
 } ]
 _global_script_class_icons={
 "CameraBehavior": "",
@@ -141,12 +161,15 @@ _global_script_class_icons={
 "Character": "",
 "CharacterController": "",
 "DataContainer": "",
+"ExpandingInventory": "",
+"GroupSlot": "",
 "InputListener": "",
 "InstanceContainer": "",
 "Inventory": "",
 "Item": "",
 "ItemContainer": "",
 "ItemDB": "",
+"Label3D": "",
 "Logger": "",
 "MovementAction": "",
 "MovementState": "",
@@ -154,12 +177,13 @@ _global_script_class_icons={
 "MovementStateMachine": "",
 "MovementTransition": "",
 "MovementTransitionConditional": "",
+"Pickable": "",
 "Player": "",
 "PlayerController": "",
 "PlayerSpawner": "res://resources/editor/custom_classes_icons/player_spawner.svg",
 "Raycaster": "",
-"RestrictedInventory": "",
-"Slot": ""
+"Slot": "",
+"TypeSlot": ""
 }
 
 [application]

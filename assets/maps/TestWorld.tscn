@@ -1,8 +1,8 @@
 [gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://assets/prototyping/block/Block.tscn" type="PackedScene" id=1]
-[ext_resource path="res://src/player_logic/player_spawner/player_spawner.gd" type="Script" id=2]
-[ext_resource path="res://src/in_world_logic/pickable/pickable.gd" type="Script" id=3]
+[ext_resource path="res://src/game/player_logic/player_spawner/player_spawner.gd" type="Script" id=2]
+[ext_resource path="res://src/game/in_world_logic/pickable/pickable.gd" type="Script" id=3]
 
 [sub_resource type="ProceduralSky" id=1]
 

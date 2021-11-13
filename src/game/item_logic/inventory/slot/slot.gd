@@ -76,6 +76,11 @@ func set_uid(uid: int) -> void:
 
 
 
+func get_uid() -> int:
+	return _uid
+
+
+
 func get_max_amount() -> int:
 	return _max_amount
 

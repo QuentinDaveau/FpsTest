@@ -3,6 +3,7 @@ class_name ItemDB
 
 """
 Data class dedicated to store the items data
+TEMP: May be changed as a script class and data class later ?
 """
 
 

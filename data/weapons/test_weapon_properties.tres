@@ -1,0 +1,13 @@
+[gd_resource type="Resource" load_steps=4 format=2]
+
+[ext_resource path="res://src/game/weapon_logic/weapon_data/weapon_data.gd" type="Script" id=1]
+
+[sub_resource type="GDScript" id=1]
+
+[sub_resource type="Resource" id=2]
+script = SubResource( 1 )
+cooldown_between_shots = -1.0
+
+[resource]
+script = ExtResource( 1 )
+triggers = [ SubResource( 2 ) ]

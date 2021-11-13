@@ -58,6 +58,17 @@ func push_type_item(receiver_inventory: Inventory, target_slot_type: int = -1, a
 
 
 
+func take_item(type: int, amount: int = 1) -> TransactionResult:
+	var slot := _find_slot_from_type(type, true)
+	if not slot:
+		return TransactionResult.new(TransactionResult.TYPE.TAKE, slot.get_uid, false)
+	var taken_items := slot.take(1)
+	var result := TransactionResult.new(TransactionResult.TYPE.TAKE, slot.get_uid, true)
+	result.extract_secondary_parameters(taken_items)
+	return result
+
+
+
 func is_empty() -> bool:
 	for slot in _slots:
 		if slot.has_item():
@@ -74,9 +85,11 @@ func _get_free_slot_for(item: ItemContainer) -> Slot:
 
 
 
-func _find_slot_from_type(item_type: int) -> Slot:
+func _find_slot_from_type(item_type: int, not_empty: bool = false) -> Slot:
 	for slot in _slots:
 		if slot.has_item_type(item_type):
+			if not_empty and slot.is_empty():
+				continue
 			return slot
 	return null
 
@@ -125,4 +138,45 @@ func _handle_returned_item(returned: ItemContainer) -> void:
 # TODO: See if we delete slots or not
 func _on_slot_emptied(slot: Slot) -> void:
 	pass
+
+
+
+"""
+Class dedicated to be used for transactions with the inventory and non-inventory
+classes. Fills the role of the ItemContainer but outside of the inventory
+"""
+class TransactionResult:
+	
+	enum TYPE {GIVE, TAKE, FETCH}
+	
+	var transaction_type: int
+	var slot_uid: int
+	var item_type: int
+	var item_group: int
+	var transacted_amount: int
+	var item: Object
+	var success: bool
+	
+	
+	func _init(transaction_type: int, slot_uid: int, success: bool = true) -> void:
+		self.transaction_type = transaction_type
+		self.slot_uid = slot_uid
+		self.success = success
+	
+	
+	
+#	func set_secondary_parameters(item_type: int, item_group: int, transacted_amount: int) -> void:
+#		self.item_type = item_type
+#		self.item_group = item_group
+#		self.transacted_amount = transacted_amount
+	
+	
+	
+	func extract_secondary_parameters(item_container: ItemContainer) -> void:
+		self.item_type = item_container.get_type()
+		self.item_group = item_container.get_group()
+		self.transacted_amount = item_container.get_amount()
+		self.item = item_container.get_item()
+	
+
 

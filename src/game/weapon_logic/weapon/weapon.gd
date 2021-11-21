@@ -12,7 +12,7 @@ const MUZZLE_LOCATION: String = "MuzzleLocation"
 
 export(Resource) var _weapon_data: Resource setget _check_weapon_data_type
 
-var _shoot_mechanisms := []
+var _mechanisms := []
 
 
 
@@ -20,7 +20,33 @@ var _shoot_mechanisms := []
 func _ready() -> void:
 	if Engine.editor_hint:
 		_check_and_create_muzzle(MUZZLE_LOCATION)
+	else:
+		_apply_data()
+		# TEMP: Will be later handled in the triggers ?
+		add_child(InputListener.new(self, "_on_trigger_press", InputListener.TYPE.FIRE))
+
+
+# TEMP for test
+func _apply_data() -> void:
+	_weapon_data = _weapon_data as WeaponData
+	var c
+	for clip in _weapon_data.clips:
+		c = ClipMechanism.new(clip)
+		_mechanisms.append(c)
+	var m
+	for muzzle in _weapon_data.muzzles:
+		m = MuzzleMechanism.new(get_node(MUZZLE_LOCATION))
+		_mechanisms.append(m)
+	for trigger in _weapon_data.triggers:
+		_mechanisms.append(TriggerSingleFire.new(c, m, trigger))
 	
+
+
+# TEMP for test
+func _on_trigger_press(pressed: bool) -> void:
+	for mech in _mechanisms:
+		if mech is TriggerMechanism:
+			mech.trigger() if pressed else mech.release()
 
 
 
@@ -43,6 +69,8 @@ func _check_and_create_muzzle(name: String) -> void:
 
 
 func _check_weapon_data_type(value) -> void:
+	if not value:
+		return
 	if value is WeaponData:
 		_weapon_data = value
 	else:

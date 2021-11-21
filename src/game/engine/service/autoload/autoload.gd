@@ -9,6 +9,7 @@ const nodes_to_load := [
 	preload("res://src/game/engine/service/services/cameras.gd"),
 	preload("res://src/game/engine/service/services/debug/state_ui.gd"),
 	preload("res://src/game/engine/service/services/item.gd"),
+	preload("res://src/game/engine/service/services/world_simulation.gd")
 ]
 
 

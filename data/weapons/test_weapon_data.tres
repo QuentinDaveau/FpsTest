@@ -1,0 +1,24 @@
+[gd_resource type="Resource" load_steps=8 format=2]
+
+[ext_resource path="res://src/game/weapon_logic/weapon/weapon_data.gd" type="Script" id=1]
+[ext_resource path="res://src/game/weapon_logic/clip_mechanism/clip_data.gd" type="Script" id=2]
+[ext_resource path="res://src/game/weapon_logic/muzzle_mechanism/muzzle_data.gd" type="Script" id=3]
+[ext_resource path="res://src/game/weapon_logic/trigger_mechanism/trigger_single_fire_data.gd" type="Script" id=4]
+
+[sub_resource type="Resource" id=1]
+script = ExtResource( 2 )
+max_ammo_per_clip = 10
+accepted_ammo_type = 7
+
+[sub_resource type="Resource" id=2]
+script = ExtResource( 3 )
+
+[sub_resource type="Resource" id=3]
+script = ExtResource( 4 )
+cooldown_between_shots = 0.1
+
+[resource]
+script = ExtResource( 1 )
+triggers = [ SubResource( 3 ) ]
+clips = [ SubResource( 1 ) ]
+muzzles = [ SubResource( 2 ) ]

@@ -9,6 +9,7 @@ other inventories.
 
 signal added_slot(slot)
 signal removed_slot(slot)
+signal emptied()
 signal updated()
 
 
@@ -57,13 +58,24 @@ func push_type_item(receiver_inventory: Inventory, target_slot_type: int = -1, a
 	emit_signal("updated")
 
 
-
-func take_item(type: int, amount: int = 1) -> TransactionResult:
-	var slot := _find_slot_from_type(type, true)
+# TODO: Clean those two very similar function (assemble into one ?)
+func take_type_item(type: int, amount: int = 1) -> TransactionResult:
+	var slot := _find_slot_from_type(type)
 	if not slot:
 		return TransactionResult.new(TransactionResult.TYPE.TAKE, slot.get_uid, false)
 	var taken_items := slot.take(1)
 	var result := TransactionResult.new(TransactionResult.TYPE.TAKE, slot.get_uid, true)
+	result.extract_secondary_parameters(taken_items)
+	return result
+
+
+
+func take_group_item(group: int, amount: int = 1) -> TransactionResult:
+	var slot := _find_slot_from_group(group)
+	if not slot:
+		return TransactionResult.new(TransactionResult.TYPE.TAKE, -1, false)
+	var taken_items := slot.take(1)
+	var result := TransactionResult.new(TransactionResult.TYPE.TAKE, slot.get_uid(), true)
 	result.extract_secondary_parameters(taken_items)
 	return result
 
@@ -84,12 +96,18 @@ func _get_free_slot_for(item: ItemContainer) -> Slot:
 	return _handle_no_free_slot(item.get_type())
 
 
-
-func _find_slot_from_type(item_type: int, not_empty: bool = false) -> Slot:
+# TODO: Clean those two very similar function (assemble into one ?)
+func _find_slot_from_type(item_type: int) -> Slot:
 	for slot in _slots:
 		if slot.has_item_type(item_type):
-			if not_empty and slot.is_empty():
-				continue
+			return slot
+	return null
+
+
+
+func _find_slot_from_group(item_group: int) -> Slot:
+	for slot in _slots:
+		if slot.has_item_group(item_group):
 			return slot
 	return null
 
@@ -137,7 +155,10 @@ func _handle_returned_item(returned: ItemContainer) -> void:
 
 # TODO: See if we delete slots or not
 func _on_slot_emptied(slot: Slot) -> void:
-	pass
+	for slot in _slots:
+		if not slot.is_empty():
+			return
+	emit_signal("emptied")
 
 
 

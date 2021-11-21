@@ -37,7 +37,7 @@ static func get_item_data(item_type: int) -> ItemProperties:
 	TYPE.RIFLE_AMMO: ItemProperties.new(GROUP.AMMO, 99, false, "res://assets/prototyping/block/Block.tscn"),
 	TYPE.SHOTGUN_AMMO: ItemProperties.new(GROUP.AMMO, 99, false, "res://assets/prototyping/block/Block.tscn"),
 	TYPE.SNIPER_AMMO: ItemProperties.new(GROUP.AMMO, 99, false, "res://assets/prototyping/block/Block.tscn"),
-	TYPE.PISTOL_AMMO: ItemProperties.new(GROUP.AMMO, 99, false, "res://assets/prototyping/block/Block.tscn"),
+	TYPE.PISTOL_AMMO: ItemProperties.new(GROUP.AMMO, 99, false, "res://assets/projectiles/TestProjectile.tscn"),
 	}
 	return items_data.get(item_type)
 

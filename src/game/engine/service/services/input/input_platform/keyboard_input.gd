@@ -19,13 +19,17 @@ func _unhandled_input(event: InputEvent) -> void:
 			return
 		if _event_is_motion(event):
 			emit_signal("input_received", TYPE.MOTION, _get_motion_value())
-			return
-		if event.is_action("ui_select"):
+		elif event.is_action("ui_select"):
 			emit_signal("input_received", TYPE.JUMP, event.pressed)
-		if event.is_action("ui_shift"):
+		elif event.is_action("ui_shift"):
 			emit_signal("input_received", TYPE.RUN, event.pressed)
-		if event.is_action("ui_ctrl"):
+		elif event.is_action("ui_ctrl"):
 			emit_signal("input_received", TYPE.CROUCH, event.pressed)
+	elif event is InputEventMouseButton:
+		if event.is_action("ui_lclick"):
+			emit_signal("input_received", TYPE.FIRE, event.pressed)
+		elif event.is_action("ui_rclick"):
+			emit_signal("input_received", TYPE.ALT_FIRE, event.pressed)
 
 
 

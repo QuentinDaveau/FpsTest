@@ -1,4 +1,4 @@
-extends Node
+extends Object
 class_name MuzzleMechanism
 
 """
@@ -10,25 +10,19 @@ signal shot()
 signal dry_shot()
 
 
-const SPAWN_LOCATION_NODE_NAME: String = "ProjectileSpawnLocation"
-
-
 var _projectile_spawn_location: Position3D
 
 
-func _ready() -> void:
-	if Engine.editor_hint:
-		if not get_node(SPAWN_LOCATION_NODE_NAME):
-			var spawn_location := Position3D.new()
-			spawn_location.name = SPAWN_LOCATION_NODE_NAME
-			add_child(spawn_location)
-			spawn_location.set_owner(get_tree().edited_scene_root)
+func _init(projectile_spawn_location: Position3D) -> void:
+	_projectile_spawn_location = projectile_spawn_location
 
 
 
 # TEMP: Wouldn't it make more sens for the dry fire to be handled in the trigger ?
-func shoot(projectile) -> void:
+func shoot(projectile: Projectile) -> void:
 	if not projectile:
 		emit_signal("dry_shot")
 	else:
+		Service.fetch(Service.TYPE.WORLD_SIMULATION).spawn_projectile(projectile, _projectile_spawn_location.global_transform)
 		emit_signal("shot")
+

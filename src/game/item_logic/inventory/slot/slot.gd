@@ -96,6 +96,11 @@ func is_full() -> bool:
 
 
 
+func is_empty() -> bool:
+	return _item.get_amount() == 0 if has_item() else true
+
+
+
 func can_receive(item: ItemContainer) -> bool:
 	return not has_item() or (_item.get_type() == item.get_type() and not is_full())
 
@@ -103,6 +108,11 @@ func can_receive(item: ItemContainer) -> bool:
 
 func has_item_type(item_type: int) -> bool:
 	return has_item() and item_type == _item.get_type()
+
+
+
+func has_item_group(item_group: int) -> bool:
+	return has_item() and item_group == _item.get_group()
 
 
 

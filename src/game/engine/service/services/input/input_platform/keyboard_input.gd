@@ -25,6 +25,8 @@ func _unhandled_input(event: InputEvent) -> void:
 			emit_signal("input_received", TYPE.RUN, event.pressed)
 		elif event.is_action("ui_ctrl"):
 			emit_signal("input_received", TYPE.CROUCH, event.pressed)
+		elif event.is_action("reload"):
+			emit_signal("input_received", TYPE.RELOAD, event.pressed)
 	elif event is InputEventMouseButton:
 		if event.is_action("ui_lclick"):
 			emit_signal("input_received", TYPE.FIRE, event.pressed)

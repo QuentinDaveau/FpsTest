@@ -39,32 +39,38 @@ func receive_item(item: ItemContainer) -> ItemContainer:
 
 
 
-func push_specific_item(receiver_inventory: Inventory, target_slot_uid: int, amount: int = -1) -> void:
-	var target_slot = _find_slot_from_uid(target_slot_uid)
+func push_specific_item(receiver_inventory: Inventory, target_slot_uid: int, amount: int = -1) -> TransactionResult:
+	var target_slot := _find_slot_from_uid(target_slot_uid)
 	if not target_slot:
-		return
-	_handle_returned_item(receiver_inventory.receive_item(target_slot.take(amount)))
+		return TransactionResult.new(TransactionResult.TYPE.TRANSFER, -1, false)
+	var sent_container := target_slot.take(amount)
+	var returned_container := receiver_inventory.receive_item(sent_container)
+	_handle_returned_item(returned_container)
 	emit_signal("updated")
+	return TransactionResult.new(TransactionResult.TYPE.TRANSFER, target_slot.get_uid(), true, sent_container.get_amount() - (returned_container.get_amount() if returned_container else 0))
 
 
 
-func push_type_item(receiver_inventory: Inventory, target_slot_type: int = -1, amount: int = -1) -> void:
+func push_type_item(receiver_inventory: Inventory, target_slot_type: int = -1, amount: int = -1) -> TransactionResult:
 	if not _slots:
-		return
-	var target_slot = _slots[0] if target_slot_type == -1 else _find_slot_from_type(target_slot_type)
+		return TransactionResult.new(TransactionResult.TYPE.TRANSFER, -1, false)
+	var target_slot: Slot = _slots[0] if target_slot_type == -1 else _find_slot_from_type(target_slot_type)
 	if not target_slot:
-		return
-	_handle_returned_item(receiver_inventory.receive_item(target_slot.take(amount if amount != -1 else target_slot.get_amount())))
+		return TransactionResult.new(TransactionResult.TYPE.TRANSFER, -1, false)
+	var sent_container := target_slot.take(amount if amount != -1 else target_slot.get_amount())
+	var returned_container := receiver_inventory.receive_item(sent_container)
+	_handle_returned_item(returned_container)
 	emit_signal("updated")
+	return TransactionResult.new(TransactionResult.TYPE.TRANSFER, -1, false, sent_container.get_amount() - (returned_container.get_amount() if returned_container else 0))
 
 
 # TODO: Clean those two very similar function (assemble into one ?)
 func take_type_item(type: int, amount: int = 1) -> TransactionResult:
 	var slot := _find_slot_from_type(type)
 	if not slot:
-		return TransactionResult.new(TransactionResult.TYPE.TAKE, slot.get_uid, false)
+		return TransactionResult.new(TransactionResult.TYPE.TAKE, -1, false)
 	var taken_items := slot.take(1)
-	var result := TransactionResult.new(TransactionResult.TYPE.TAKE, slot.get_uid, true)
+	var result := TransactionResult.new(TransactionResult.TYPE.TAKE, -1, true)
 	result.extract_secondary_parameters(taken_items)
 	return result
 
@@ -86,6 +92,25 @@ func is_empty() -> bool:
 		if slot.has_item():
 			return false
 	return true
+
+
+
+func get_type_item_amount(type: int) -> int:
+	var amount: int = 0
+	for slot in _slots:
+		if slot.has_item() and slot.has_item_type(type):
+			amount += slot.get_amount()
+	return amount
+
+
+
+func get_all_items() -> Array:
+	var items := []
+	for own_slot in _slots:
+		var slot_data := TransactionResult.new(TransactionResult.TYPE.FETCH, own_slot.get_uid(), true, own_slot.get_amount())
+		slot_data.set_secondary_parameters(own_slot.get_item_type(), own_slot.get_item_group())
+		items.append(slot_data)
+	return items
 
 
 
@@ -162,13 +187,15 @@ func _on_slot_emptied(slot: Slot) -> void:
 
 
 
+# TEMP: Should be separated into multiple classes with different purposes
 """
 Class dedicated to be used for transactions with the inventory and non-inventory
-classes. Fills the role of the ItemContainer but outside of the inventory
+classes and as a result of transaction between two inventories. Fills the role 
+of the ItemContainer but outside of the inventory
 """
 class TransactionResult:
 	
-	enum TYPE {GIVE, TAKE, FETCH}
+	enum TYPE {GIVE, TAKE, FETCH, TRANSFER}
 	
 	var transaction_type: int
 	var slot_uid: int
@@ -179,17 +206,17 @@ class TransactionResult:
 	var success: bool
 	
 	
-	func _init(transaction_type: int, slot_uid: int, success: bool = true) -> void:
+	func _init(transaction_type: int, slot_uid: int, success: bool = true, transacted_amount = 0) -> void:
 		self.transaction_type = transaction_type
 		self.slot_uid = slot_uid
 		self.success = success
+		self.transacted_amount = transacted_amount
 	
 	
 	
-#	func set_secondary_parameters(item_type: int, item_group: int, transacted_amount: int) -> void:
-#		self.item_type = item_type
-#		self.item_group = item_group
-#		self.transacted_amount = transacted_amount
+	func set_secondary_parameters(item_type: int, item_group: int) -> void:
+		self.item_type = item_type
+		self.item_group = item_group
 	
 	
 	

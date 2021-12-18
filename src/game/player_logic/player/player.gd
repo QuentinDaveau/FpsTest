@@ -5,11 +5,14 @@ class_name Player
 Player class. Serves as a container for its different components
 """
 
+
 export(Vector3) var head_position := Vector3(0.0, 1.35, 0.0)
 
 
 
 func _init() -> void:
+	# TEMP: for debug
+	Service.fetch(Service.TYPE.SIGNAL).register(self, "inventory_updated")
 	register_controller(PlayerController.new(self))
 	# TEMP: The inventory data will later come from a centralized data class which will generate the inventory.
 	# Put here for now just for tests

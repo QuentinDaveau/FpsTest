@@ -37,7 +37,8 @@ func take_projectile() -> Projectile:
 
 
 
-func reload() -> void:
+# To override
+func reload(source_inventory: Inventory) -> void:
 	pass
 
 

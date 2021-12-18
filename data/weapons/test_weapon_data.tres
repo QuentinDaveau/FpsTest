@@ -1,7 +1,7 @@
 [gd_resource type="Resource" load_steps=8 format=2]
 
 [ext_resource path="res://src/game/weapon_logic/weapon/weapon_data.gd" type="Script" id=1]
-[ext_resource path="res://src/game/weapon_logic/clip_mechanism/clip_data.gd" type="Script" id=2]
+[ext_resource path="res://src/game/weapon_logic/clip_mechanism/clip_magazine_data.gd" type="Script" id=2]
 [ext_resource path="res://src/game/weapon_logic/muzzle_mechanism/muzzle_data.gd" type="Script" id=3]
 [ext_resource path="res://src/game/weapon_logic/trigger_mechanism/trigger_single_fire_data.gd" type="Script" id=4]
 

@@ -121,12 +121,18 @@ func has_item() -> bool:
 
 
 
+func get_item_type() -> int:
+	return -1 if not _item else _item.get_type()
+
+
+
+func get_item_group() -> int:
+	return -1 if not _item else _item.get_group()
+
+
+
 func get_item():
 	return _item
-
-
-
-
 
 
 

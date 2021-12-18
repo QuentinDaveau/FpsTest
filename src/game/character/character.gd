@@ -2,6 +2,11 @@ extends KinematicBody
 class_name Character
 
 
+
+# TEMP for debug
+signal inventory_updated(inventory)
+
+
 var _controller: CharacterController
 var _inventory: Inventory
 
@@ -14,6 +19,7 @@ func register_controller(controller: CharacterController) -> void:
 
 func register_inventory(inventory: Inventory) -> void:
 	_inventory = inventory
+	_inventory.connect("updated", self, "_on_inventory_updated")
 
 
 
@@ -26,3 +32,6 @@ func get_inventory() -> Inventory:
 	return _inventory
 
 
+
+func _on_inventory_updated() -> void:
+	emit_signal("inventory_updated", _inventory)

@@ -42,12 +42,12 @@ func _apply_data() -> void:
 		var t := TriggerSingleFire.new(trigger)
 		t.connect("action", self, "_on_trigger_action", [t, c, m])
 		_mechanisms.append(t)
-	
+
 
 
 # TEMP for test
 func _on_trigger_press(pressed: bool) -> void:
-	use() if pressed else stop_use()
+	use(USAGE.PRIMARY) if pressed else stop_use(USAGE.PRIMARY)
 
 
 
@@ -77,17 +77,23 @@ func reload(source_inventory: Inventory) -> void:
 
 # TEMP for test
 #override
-func use() -> void:
-	for mech in _mechanisms:
-		if mech is TriggerMechanism:
-			mech.press()
+func use(usage: int) -> void:
+	.use(usage)
+	if usage == USAGE.PRIMARY:
+		for mech in _mechanisms:
+			if mech is TriggerMechanism:
+				mech.press()
+	elif usage == USAGE.TERTIARY:
+		reload(_owner_inventory)
 
 
 #override
-func stop_use() -> void:
-	for mech in _mechanisms:
-		if mech is TriggerMechanism:
-			mech.release()
+func stop_use(usage: int) -> void:
+	.stop_use(usage)
+	if usage == USAGE.PRIMARY:
+		for mech in _mechanisms:
+			if mech is TriggerMechanism:
+				mech.release()
 
 
 

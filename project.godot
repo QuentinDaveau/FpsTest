@@ -30,6 +30,11 @@ _global_script_classes=[ {
 "path": "res://src/game/character/character.gd"
 }, {
 "base": "Node",
+"class": "CharacterActions",
+"language": "GDScript",
+"path": "res://src/game/character/character_actions/character_actions.gd"
+}, {
+"base": "Node",
 "class": "CharacterController",
 "language": "GDScript",
 "path": "res://src/game/character/character_controller/character_controller.gd"
@@ -63,6 +68,11 @@ _global_script_classes=[ {
 "class": "Equipable",
 "language": "GDScript",
 "path": "res://src/game/equipable/equipable.gd"
+}, {
+"base": "Resource",
+"class": "EquipableData",
+"language": "GDScript",
+"path": "res://src/game/equipable/equipable_data.gd"
 }, {
 "base": "Node",
 "class": "EquipableHandler",
@@ -244,6 +254,7 @@ _global_script_class_icons={
 "CameraStack": "res://resources/editor/custom_classes_icons/camera_lens.svg",
 "Cameras": "",
 "Character": "",
+"CharacterActions": "",
 "CharacterController": "",
 "ClipData": "",
 "ClipMagazine": "",
@@ -251,6 +262,7 @@ _global_script_class_icons={
 "ClipMechanism": "",
 "DataContainer": "",
 "Equipable": "",
+"EquipableData": "",
 "EquipableHandler": "",
 "ExpandingInventory": "",
 "GroupSlot": "",

@@ -28,12 +28,13 @@ enum GROUP {
 
 
 # TEMP: Very dirty, to be able to use the item data list like a static variable
+# May want to do a tool script to automatically generate those(
 static func get_item_data(item_type: int) -> ItemProperties:
 	var items_data := {
 	TYPE.RIFLE: ItemProperties.new(GROUP.WEAPON, 1, true, "res://assets/prototyping/block/Block.tscn"),
 	TYPE.SHOTGUN: ItemProperties.new(GROUP.WEAPON, 1, true, "res://assets/prototyping/block/Block.tscn"),
 	TYPE.SNIPER: ItemProperties.new(GROUP.WEAPON, 1, true, "res://assets/prototyping/block/Block.tscn"),
-	TYPE.PISTOL: ItemProperties.new(GROUP.WEAPON, 1, true, "res://assets/prototyping/block/Block.tscn"),
+	TYPE.PISTOL: ItemProperties.new(GROUP.WEAPON, 1, true, "res://assets/weapons/TestWeapon.tscn"),
 	TYPE.RIFLE_AMMO: ItemProperties.new(GROUP.AMMO, 99, false, "res://assets/prototyping/block/Block.tscn"),
 	TYPE.SHOTGUN_AMMO: ItemProperties.new(GROUP.AMMO, 99, false, "res://assets/prototyping/block/Block.tscn"),
 	TYPE.SNIPER_AMMO: ItemProperties.new(GROUP.AMMO, 99, false, "res://assets/prototyping/block/Block.tscn"),

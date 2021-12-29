@@ -105,10 +105,29 @@ func get_type_item_amount(type: int) -> int:
 
 
 func get_all_items() -> Array:
+	return _get_all_items()
+
+
+
+func get_all_items_type(type: int) -> Array:
+	return _get_all_items(type)
+
+
+
+func get_all_items_group(group: int) -> Array:
+	return _get_all_items(-1, group)
+
+
+
+func _get_all_items(type: int = -1, group: int = -1) -> Array:
 	var items := []
 	for own_slot in _slots:
+		if type != -1 and not own_slot.has_item_type(type):
+			continue
+		if group != -1 and not own_slot.has_item_group(group):
+			continue
 		var slot_data := TransactionResult.new(TransactionResult.TYPE.FETCH, own_slot.get_uid(), true, own_slot.get_amount())
-		slot_data.set_secondary_parameters(own_slot.get_item_type(), own_slot.get_item_group())
+		slot_data.set_secondary_parameters(own_slot.get_item_type(), own_slot.get_item_group(), own_slot.get_item())
 		items.append(slot_data)
 	return items
 
@@ -214,9 +233,10 @@ class TransactionResult:
 	
 	
 	
-	func set_secondary_parameters(item_type: int, item_group: int) -> void:
+	func set_secondary_parameters(item_type: int, item_group: int, item: Object) -> void:
 		self.item_type = item_type
 		self.item_group = item_group
+		self.item = item
 	
 	
 	

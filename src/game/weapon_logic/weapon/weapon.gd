@@ -16,15 +16,17 @@ var _mechanisms := []
 
 
 
+func _set_data(data: EquipableData) -> void:
+	_apply_data()
+	._set_data(_weapon_data)
+
+
 
 func _ready() -> void:
 	if Engine.editor_hint:
 		_check_and_create_muzzle(MUZZLE_LOCATION)
 	else:
 		_apply_data()
-		# TEMP: Will be later handled in the player ?
-		add_child(InputListener.new(self, "_on_trigger_press", InputListener.TYPE.FIRE))
-		add_child(InputListener.new(self, "_on_reload_press", InputListener.TYPE.RELOAD))
 
 
 # TEMP for test
@@ -45,19 +47,6 @@ func _apply_data() -> void:
 
 
 
-# TEMP for test
-func _on_trigger_press(pressed: bool) -> void:
-	use(USAGE.PRIMARY) if pressed else stop_use(USAGE.PRIMARY)
-
-
-
-# TEMP for test
-func _on_reload_press(pressed: bool) -> void:
-	if pressed: 
-		reload(Service.fetch(Service.TYPE.FETCH_CHARACTER).from_cache().get_inventory())
-
-
-
 func _on_trigger_action(trigger: TriggerMechanism, target_clip: ClipMechanism, target_muzzle: MuzzleMechanism) -> void:
 	var projectile := target_clip.take_projectile()
 	if not projectile:
@@ -68,7 +57,7 @@ func _on_trigger_action(trigger: TriggerMechanism, target_clip: ClipMechanism, t
 
 
 # TEMP for test
-func reload(source_inventory: Inventory) -> void:
+func reload(source_inventory: InventoryInterface) -> void:
 	for mech in _mechanisms:
 		if mech is ClipMechanism:
 			mech.reload(source_inventory)

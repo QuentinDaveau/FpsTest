@@ -22,7 +22,7 @@ func _init(clip_data: ClipData) -> void:
 	# TEMP: inventory init should be handled in its dedicated class
 	# TEMP: for test
 	var slot = TypeSlot.new(clip_data.accepted_ammo_type, clip_data.max_ammo_per_clip)
-	slot.add(Service.fetch(Service.TYPE.ITEM).generate(ItemDB.TYPE.PISTOL_AMMO, clip_data.max_ammo_per_clip))
+#	slot.add(Service.fetch(Service.TYPE.ITEM).generate(ItemDB.TYPE.PISTOL_AMMO, clip_data.max_ammo_per_clip))
 	_inventory = Inventory.new([slot])
 	_inventory.connect("emptied", self, "is_empty")
 
@@ -38,7 +38,7 @@ func take_projectile() -> Projectile:
 
 
 # To override
-func reload(source_inventory: Inventory) -> void:
+func reload(inventory_interface: InventoryInterface) -> void:
 	pass
 
 

@@ -19,6 +19,7 @@ cooldown_between_shots = 0.1
 
 [resource]
 script = ExtResource( 1 )
+allowed_usages = 5
 triggers = [ SubResource( 3 ) ]
 clips = [ SubResource( 1 ) ]
 muzzles = [ SubResource( 2 ) ]

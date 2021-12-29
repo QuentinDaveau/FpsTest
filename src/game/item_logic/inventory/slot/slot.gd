@@ -132,7 +132,7 @@ func get_item_group() -> int:
 
 
 func get_item():
-	return _item
+	return null if not _item else _item.get_item()
 
 
 

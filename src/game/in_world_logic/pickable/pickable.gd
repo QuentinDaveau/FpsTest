@@ -38,8 +38,8 @@ func _enter_tree() -> void:
 
 func _on_body_enter(body: Node) -> void:
 	if body is Character and not _inventory.is_empty():
-		var character_inventory: Inventory = body.get_inventory()
-		_inventory.push_type_item(character_inventory)
+		var character_inventory: InventoryInterface = body.get_inventory()
+		character_inventory.receive_item(_inventory)
 
 
 

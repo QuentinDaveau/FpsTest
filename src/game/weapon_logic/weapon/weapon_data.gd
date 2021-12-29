@@ -1,4 +1,4 @@
-extends Resource
+extends EquipableData
 class_name WeaponData
 tool
 

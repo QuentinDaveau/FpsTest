@@ -9,7 +9,7 @@ var _row_container: VBoxContainer
 
 
 func _ready() -> void:
-	add_constant_override("margin_top", 75)
+	add_constant_override("margin_top", 150)
 	var rect := ColorRect.new()
 	rect.color = Color(0.2, 0.2, 0.2, 0.2)
 	add_child(rect)

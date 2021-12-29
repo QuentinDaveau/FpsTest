@@ -11,9 +11,9 @@ var _target_type: int
 var _last_input_value
 
 
-func _init(target: Object, method_name: String, type: int) -> void:
+func _init(target: Object, method_name: String, type: int, binds: Array = []) -> void:
 	_target_type = type
-	self.connect("input", target, method_name)
+	self.connect("input", target, method_name, binds)
 	var input := Service.fetch(Service.TYPE.INPUT)
 	if input:
 		input.connect("input_received", self, "_on_input_received")

@@ -340,7 +340,7 @@ _global_script_class_icons={
 "PlayerArmsController": "",
 "PlayerController": "",
 "PlayerEquipableHandler": "",
-"PlayerSpawner": "",
+"PlayerSpawner": "res://resources/editor/custom_classes_icons/player_spawner.svg",
 "Projectile": "",
 "Raycaster": "",
 "RocketProjectile": "",

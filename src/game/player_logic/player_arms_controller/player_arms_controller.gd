@@ -30,3 +30,8 @@ func use_equipable(usage: int) -> bool:
 
 func stop_use_equipable(usage: int) -> bool:
 	return _player_equipable.set_use(usage, false)
+
+
+
+func has_equipable() -> bool:
+	return _player_equipable.has_equipable()

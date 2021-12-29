@@ -80,6 +80,12 @@ class MoveAction:
 		_listener = InputListener.new(self, "_on_motion_change", InputListener.TYPE.MOTION)
 	
 	
+	
+	func enter() -> void:
+		update()
+	
+	
+	
 	# TEMP: the move value will be fetched from a "parameters" file
 	func update() -> void:
 		if _motion_updated:

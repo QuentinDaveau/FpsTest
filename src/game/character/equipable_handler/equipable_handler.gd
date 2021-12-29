@@ -48,3 +48,8 @@ func is_using(usage: int) -> bool:
 	if not _current_equipable or _current_equipable.get_current_usage() != usage:
 		return false
 	return true
+
+
+
+func has_equipable() -> bool:
+	return _current_equipable != null

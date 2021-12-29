@@ -26,20 +26,48 @@ player arms states
 class UseAction:
 	extends ArmsAction
 	
-	var _usage: int
+	var _listeners := []
+	var _actions_value: int = 0
+	var _changed_values: int = 0
 	
 	
-	func _init(controller: PlayerArmsController, usage: int).(controller) -> void:
-		_usage = usage
-
-
+	func _init(controller: PlayerArmsController).(controller) -> void:
+		_listeners.append(InputListener.new(self, "_on_action_change", InputListener.TYPE.FIRE, [1]))
+		_listeners.append(InputListener.new(self, "_on_action_change", InputListener.TYPE.ALT_FIRE, [2]))
+		_listeners.append(InputListener.new(self, "_on_action_change", InputListener.TYPE.RELOAD, [4]))
+	
+	
 	func enter() -> void:
-		_controller.use_equipable(_usage)
+		update()
 	
+	
+	func update() -> void:
+		_update_action(_actions_value & 1, 1, Equipable.USAGE.PRIMARY)
+		_update_action(_actions_value & 2, 2, Equipable.USAGE.SECONDARY)
+		_update_action(_actions_value & 4, 4, Equipable.USAGE.TERTIARY)
 	
 	
 	func exit() -> void:
-		_controller.stop_use_equipable(_usage)
+		_controller.stop_use_equipable(Equipable.USAGE.PRIMARY)
+		_controller.stop_use_equipable(Equipable.USAGE.SECONDARY)
+		_controller.stop_use_equipable(Equipable.USAGE.TERTIARY)
+	
+	
+	# TEMP: Could be simplified once the equipable has action flags
+	func _update_action(action_value: bool, action_id: int, equipable_usage: int) -> void:
+		if _changed_values & action_id:
+			var result: bool
+			if _actions_value & action_id:
+				result = _controller.use_equipable(equipable_usage)
+			else:
+				result = _controller.stop_use_equipable(equipable_usage)
+			_actions_value = _actions_value | action_id if result else _actions_value & ~action_id
+			_changed_values = _changed_values & ~action_id
+	
+	
+	func _on_action_change(action_value: bool, action_id: int) -> void:
+		_actions_value = _actions_value | action_id if action_value else _actions_value & ~action_id
+		_changed_values = _changed_values | action_id
 
 
 
@@ -78,9 +106,9 @@ class TransitionToIdle:
 	
 	
 	func _init(controller: PlayerArmsController).(controller) -> void:
-		_listeners.append(InputListener.new(self, "_on_primary_change", InputListener.TYPE.FIRE))
-		_listeners.append(InputListener.new(self, "_on_secondary_change", InputListener.TYPE.ALT_FIRE))
-		_listeners.append(InputListener.new(self, "_on_tertiary_change", InputListener.TYPE.RELOAD))
+		_listeners.append(InputListener.new(self, "_on_action_change", InputListener.TYPE.FIRE, [1]))
+		_listeners.append(InputListener.new(self, "_on_action_change", InputListener.TYPE.ALT_FIRE, [2]))
+		_listeners.append(InputListener.new(self, "_on_action_change", InputListener.TYPE.RELOAD, [4]))
 	
 	
 	func get_next_state() -> String:
@@ -94,96 +122,37 @@ class TransitionToIdle:
 		return false
 	
 	
-	# TEMP: Find a better way, maybe through a helper class ?
-	func _on_primary_change(action_value: bool) -> void:
-		_actions_value = _actions_value | 1 if action_value else _actions_value & ~1
-		
-	func _on_secondary_change(action_value: bool) -> void:
-		_actions_value = _actions_value | 2 if action_value else _actions_value & ~2
-		
-	func _on_tertiary_change(action_value: bool) -> void:
-		_actions_value = _actions_value | 4 if action_value else _actions_value & ~4
+	func _on_action_change(action_value: bool, action_id: int) -> void:
+		_actions_value = _actions_value | action_id if action_value else _actions_value & ~action_id
 
 
 
-class TransitionToUsePrimary:
+class TransitionToUse:
 	extends ArmsTransition
 	
-	var _listener: InputListener
-	var _action_value: bool = 0
+	var _listeners := []
+	var _actions_value: int = 0
 	
 	
 	func _init(controller: PlayerArmsController).(controller) -> void:
-		_listener = InputListener.new(self, "_on_input_change", InputListener.TYPE.FIRE)
+		_listeners.append(InputListener.new(self, "_on_action_change", InputListener.TYPE.FIRE, [1]))
+		_listeners.append(InputListener.new(self, "_on_action_change", InputListener.TYPE.ALT_FIRE, [2]))
+		_listeners.append(InputListener.new(self, "_on_action_change", InputListener.TYPE.RELOAD, [4]))
 	
 	
 	func get_next_state() -> String:
-		return "UsePrimary"
+		return "UseEquipable"
 	
 	
 	func check() -> bool:
-		if _action_value:
+		if _actions_value:
 			_raise_state_exit()
 			return true
 		return false
 	
 	
-	func _on_input_change(action_value: bool) -> void:
-		_action_value = action_value
-
-
-
-class TransitionToUseSecondary:
-	extends ArmsTransition
-	
-	var _listener: InputListener
-	var _action_value: bool = 0
-	
-	
-	func _init(controller: PlayerArmsController).(controller) -> void:
-		_listener = InputListener.new(self, "_on_input_change", InputListener.TYPE.ALT_FIRE)
-	
-	
-	func get_next_state() -> String:
-		return "UseSecondary"
-	
-	
-	func check() -> bool:
-		if _action_value:
-			_raise_state_exit()
-			return true
-		return false
-	
-	
-	func _on_input_change(action_value: bool) -> void:
-		_action_value = action_value
-
-
-
-class TransitionToUseTertiary:
-	extends ArmsTransition
-	
-	var _listener: InputListener
-	var _action_value: bool = 0
-	
-	
-	func _init(controller: PlayerArmsController).(controller) -> void:
-		_listener = InputListener.new(self, "_on_input_change", InputListener.TYPE.RELOAD)
-	
-	
-	func get_next_state() -> String:
-		return "UseTertiary"
-	
-	
-	func check() -> bool:
-		if _action_value:
-			_raise_state_exit()
-			return true
-		return false
-	
-	
-	func _on_input_change(action_value: bool) -> void:
-		_action_value = action_value
+	func _on_action_change(action_value: bool, action_id: int) -> void:
+		_actions_value = _actions_value | action_id if action_value else _actions_value & ~action_id
 
 
 
@@ -207,16 +176,14 @@ class TransitionToUseTertiary:
 
 # TEMP: Conditional not good, logic blocks weapon if weapon is waiting for the input
 # to stop use. Temporarily removed.
-class ConditionalHasFinishedUse:
+class ConditionalHasEquipable:
 	extends ArmsTransitionConditional
 	
-	var _check_use: int
 	
-	
-	func _init(controller: PlayerArmsController, use: int, transition: ArmsTransition).(controller, transition) -> void:
-		_check_use = use
+	func _init(controller: PlayerArmsController, transition: ArmsTransition).(controller, transition) -> void:
+		pass
 	
 	
 	func _check_conditional() -> bool:
-		return not _controller.is_using(_check_use)
+		return _controller.has_equipable()
 

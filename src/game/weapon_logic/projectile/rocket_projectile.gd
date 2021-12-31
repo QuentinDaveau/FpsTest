@@ -31,7 +31,7 @@ func _handle_spawn_logic() -> void:
 
 
 func _handle_process_logic(delta: float) -> void:
-	translate(-Vector3.FORWARD * SPEED * delta)
+	translate(Vector3.FORWARD * SPEED * delta)
 
 
 

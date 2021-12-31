@@ -29,7 +29,8 @@ var _current_usage: int
 # Since the Equipable is expected to be a packed scene, we cannot use init (variables
 # won't be set), thus we have to use notifications (that apparently won't propagate
 # to children, may cause issues in the future ?)
-func _notification(NOTIFICATION_INSTANCED) -> void:
+func _notification(notif: int) -> void:
+	if not notif == NOTIFICATION_INSTANCED: return
 	_set_data(null)
 
 

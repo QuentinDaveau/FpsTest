@@ -1,13 +1,13 @@
 [gd_resource type="ShaderMaterial" load_steps=3 format=2]
 
-[ext_resource path="res://resources/game/textures/tile.png" type="Texture" id=1]
-
-[sub_resource type="Shader" id=1]
+[sub_resource type="Shader" id=10]
+resource_local_to_scene = true
 code = "shader_type spatial;
 
 const float color_mult = 1.0f;
 
 uniform sampler2D grid_texture: hint_albedo;
+uniform float brightness: hint_range(0.0f, 1.0f) = 1.0f;
 
 
 
@@ -32,13 +32,18 @@ void fragment()
 	
 	vec3 color_offset = random(floor(projected_coords.xyz));
 	
-	ALBEDO = mix((albedoX * normal_weights.x + albedoY * normal_weights.y + albedoZ * normal_weights.z), color_offset.rgb, 0.1f);
+	ALBEDO = mix(vec3(0.0f), mix((albedoX * normal_weights.x + albedoY * normal_weights.y + albedoZ * normal_weights.z), color_offset.rgb, 0.05f), brightness);
 }
 
 
 
 "
 
+[sub_resource type="StreamTexture" id=9]
+flags = 23
+load_path = "res://.import/tile.png-6e3017d9f9497b4575a1b2eeb2ce6d79.s3tc.stex"
+
 [resource]
-shader = SubResource( 1 )
-shader_param/grid_texture = ExtResource( 1 )
+shader = SubResource( 10 )
+shader_param/brightness = 0.1
+shader_param/grid_texture = SubResource( 9 )

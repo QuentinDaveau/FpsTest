@@ -25,8 +25,6 @@ func _set_data(data: EquipableData) -> void:
 func _ready() -> void:
 	if Engine.editor_hint:
 		_check_and_create_muzzle(MUZZLE_LOCATION)
-	else:
-		_apply_data()
 
 
 # TEMP for test

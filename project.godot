@@ -14,6 +14,16 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://src/game/player_logic/arms_state_machine/arms_state/arms_action.gd"
 }, {
+"base": "Spatial",
+"class": "ArmsBehaviour",
+"language": "GDScript",
+"path": "res://src/game/player_logic/arms_stack/arms_behaviour/arms_behaviour.gd"
+}, {
+"base": "Spatial",
+"class": "ArmsStack",
+"language": "GDScript",
+"path": "res://src/game/player_logic/arms_stack/arms_stack.gd"
+}, {
 "base": "Reference",
 "class": "ArmsState",
 "language": "GDScript",
@@ -104,12 +114,17 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://src/game/equipable/equipable.gd"
 }, {
+"base": "Spatial",
+"class": "EquipableAttachPoint",
+"language": "GDScript",
+"path": "res://src/game/character/equipable_handler/equipable_attach_point.gd"
+}, {
 "base": "Resource",
 "class": "EquipableData",
 "language": "GDScript",
 "path": "res://src/game/equipable/equipable_data.gd"
 }, {
-"base": "Node",
+"base": "Object",
 "class": "EquipableHandler",
 "language": "GDScript",
 "path": "res://src/game/character/equipable_handler/equipable_handler.gd"
@@ -296,6 +311,8 @@ _global_script_classes=[ {
 } ]
 _global_script_class_icons={
 "ArmsAction": "",
+"ArmsBehaviour": "",
+"ArmsStack": "",
 "ArmsState": "",
 "ArmsStateHelper": "",
 "ArmsStateMachine": "",
@@ -314,6 +331,7 @@ _global_script_class_icons={
 "ClipMechanism": "",
 "DataContainer": "",
 "Equipable": "",
+"EquipableAttachPoint": "",
 "EquipableData": "",
 "EquipableHandler": "",
 "ExpandingInventory": "",

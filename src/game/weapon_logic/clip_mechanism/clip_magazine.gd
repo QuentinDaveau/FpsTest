@@ -17,5 +17,7 @@ func reload(inventory_interface: InventoryInterface) -> void:
 	var result: Inventory.TransactionResult = inventory_interface.transfer_item(_inventory, _clip_data.accepted_ammo_type, missing_amount)
 	if result.transacted_amount > 0:
 		emit_signal("clip_updated", _inventory.get_type_item_amount(_clip_data.accepted_ammo_type), result.transacted_amount)
-	
+	else:
+		Service.fetch(Service.TYPE.LOG).output(Logger.LEVEL.WARNING, self, "Unable to find required ammo (" + ItemDB.TYPE.keys()[_clip_data.accepted_ammo_type] + ") to reload in inventory: " + String(inventory_interface.get_instance_id()))
+
 

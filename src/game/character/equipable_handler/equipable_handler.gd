@@ -1,10 +1,14 @@
-extends Node
+extends Object
 class_name EquipableHandler
 
 
 """
 Class dedicated to handle the equipables contained in its owner inventory.
 """
+
+signal unequipped(equipable)
+signal equipped(equipable)
+
 
 
 var _source_inventory: InventoryInterface
@@ -22,12 +26,16 @@ func get_all_owned_equipables() -> Array:
 
 
 
+# TEMP: Should wait for previous equipable to be unequipped (animation finished
+# and stuff) before equipping new equipable
 func equip(equipable: Equipable, replace_current: bool = true) -> bool:
 	if replace_current or _current_equipable == null:
 		if _current_equipable:
 			_current_equipable.unequip()
+			emit_signal("unequipped", _current_equipable)
 		_current_equipable = equipable
 		_current_equipable.equip(_source_inventory)
+		emit_signal("equipped", _current_equipable)
 		return true
 	return false
 

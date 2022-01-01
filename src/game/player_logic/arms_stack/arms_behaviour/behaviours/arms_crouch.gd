@@ -15,7 +15,7 @@ func _ready() -> void:
 
 # TEMP: Height and crouch height, as well as crouch speed will be set in a params file
 func _set_arms_height(var is_crouching: bool) -> void:
-	var stand_height := 1.6
+	var stand_height := 1.8
 	var crouch_height := 0.75
 	var crouch_speed := 0.4
 	var current_height := translation.y

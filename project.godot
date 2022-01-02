@@ -64,6 +64,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://src/game/engine/service/services/cameras.gd"
 }, {
+"base": "DetectionBehaviour",
+"class": "CastDetectionBehaviour",
+"language": "GDScript",
+"path": "res://src/game/weapon_logic/projectiles/behaviours/detection_behaviour/cast_detection_behaviour.gd"
+}, {
 "base": "KinematicBody",
 "class": "Character",
 "language": "GDScript",
@@ -99,7 +104,7 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://src/game/weapon_logic/clip_mechanism/clip_magazine_data.gd"
 }, {
-"base": "Object",
+"base": "Reference",
 "class": "ClipMechanism",
 "language": "GDScript",
 "path": "res://src/game/weapon_logic/clip_mechanism/clip_mechanism.gd"
@@ -108,6 +113,16 @@ _global_script_classes=[ {
 "class": "DataContainer",
 "language": "GDScript",
 "path": "res://src/game/item_logic/inventory/container/data_container.gd"
+}, {
+"base": "LifeBehaviour",
+"class": "DelayLifeBehaviour",
+"language": "GDScript",
+"path": "res://src/game/weapon_logic/projectiles/behaviours/life_behaviour/delay_life_behaviour.gd"
+}, {
+"base": "ProjectileBehaviour",
+"class": "DetectionBehaviour",
+"language": "GDScript",
+"path": "res://src/game/weapon_logic/projectiles/behaviours/detection_behaviour/detection_behaviour.gd"
 }, {
 "base": "Spatial",
 "class": "Equipable",
@@ -124,7 +139,7 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://src/game/equipable/equipable_data.gd"
 }, {
-"base": "Object",
+"base": "Reference",
 "class": "EquipableHandler",
 "language": "GDScript",
 "path": "res://src/game/character/equipable_handler/equipable_handler.gd"
@@ -139,6 +154,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://src/game/item_logic/inventory/slot/group_slot.gd"
 }, {
+"base": "ProjectileBehaviour",
+"class": "HitBehaviour",
+"language": "GDScript",
+"path": "res://src/game/weapon_logic/projectiles/behaviours/hit_behaviour/hit_behaviour.gd"
+}, {
 "base": "Node",
 "class": "InputListener",
 "language": "GDScript",
@@ -149,12 +169,12 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://src/game/item_logic/inventory/container/instance_container.gd"
 }, {
-"base": "Object",
+"base": "Reference",
 "class": "Inventory",
 "language": "GDScript",
 "path": "res://src/game/item_logic/inventory/inventory.gd"
 }, {
-"base": "Object",
+"base": "Reference",
 "class": "InventoryInterface",
 "language": "GDScript",
 "path": "res://src/game/item_logic/inventory/inventory_interface/inventory_interface.gd"
@@ -164,12 +184,12 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://src/game/engine/service/services/item.gd"
 }, {
-"base": "Object",
+"base": "Reference",
 "class": "ItemContainer",
 "language": "GDScript",
 "path": "res://src/game/item_logic/inventory/container/item_container.gd"
 }, {
-"base": "Object",
+"base": "Reference",
 "class": "ItemDB",
 "language": "GDScript",
 "path": "res://data/item_db/item_db.gd"
@@ -179,10 +199,20 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://src/game/debug/label_3D.gd"
 }, {
+"base": "ProjectileBehaviour",
+"class": "LifeBehaviour",
+"language": "GDScript",
+"path": "res://src/game/weapon_logic/projectiles/behaviours/life_behaviour/life_behaviour.gd"
+}, {
 "base": "Node",
 "class": "Logger",
 "language": "GDScript",
 "path": "res://src/game/debug/services/logger.gd"
+}, {
+"base": "ProjectileBehaviour",
+"class": "MotionBehaviour",
+"language": "GDScript",
+"path": "res://src/game/weapon_logic/projectiles/behaviours/motion_behaviour/motion_behaviour.gd"
 }, {
 "base": "Reference",
 "class": "MovementAction",
@@ -219,10 +249,15 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://src/game/weapon_logic/muzzle_mechanism/muzzle_data.gd"
 }, {
-"base": "Object",
+"base": "Reference",
 "class": "MuzzleMechanism",
 "language": "GDScript",
 "path": "res://src/game/weapon_logic/muzzle_mechanism/muzzle_mechanism.gd"
+}, {
+"base": "LifeBehaviour",
+"class": "OneFrameLifeBehaviour",
+"language": "GDScript",
+"path": "res://src/game/weapon_logic/projectiles/behaviours/life_behaviour/oneframe_life_behaviour.gd"
 }, {
 "base": "Spatial",
 "class": "Pickable",
@@ -257,29 +292,54 @@ _global_script_classes=[ {
 "base": "Spatial",
 "class": "Projectile",
 "language": "GDScript",
-"path": "res://src/game/weapon_logic/projectile/projectile.gd"
+"path": "res://src/game/weapon_logic/projectiles/projectile/projectile.gd"
 }, {
-"base": "Node",
+"base": "Resource",
+"class": "ProjectileBehaviour",
+"language": "GDScript",
+"path": "res://src/game/weapon_logic/projectiles/behaviours/projectile_behaviour.gd"
+}, {
+"base": "Reference",
 "class": "Raycaster",
 "language": "GDScript",
 "path": "res://src/game/engine/utility/physics/raycaster.gd"
 }, {
+"base": "MotionBehaviour",
+"class": "RocketMotionBehaviour",
+"language": "GDScript",
+"path": "res://src/game/weapon_logic/projectiles/behaviours/motion_behaviour/rocket_motion_behaviour.gd"
+}, {
 "base": "Projectile",
 "class": "RocketProjectile",
 "language": "GDScript",
-"path": "res://src/game/weapon_logic/projectile/rocket_projectile.gd"
+"path": "res://src/game/weapon_logic/projectiles/rocket_projectile.gd"
 }, {
-"base": "Object",
+"base": "Projectile",
+"class": "SimpleProjectile",
+"language": "GDScript",
+"path": "res://src/game/weapon_logic/projectiles/projectile/simple_projectile.gd"
+}, {
+"base": "Reference",
 "class": "Slot",
 "language": "GDScript",
 "path": "res://src/game/item_logic/inventory/slot/slot.gd"
+}, {
+"base": "DetectionBehaviour",
+"class": "SphereAreaDetectionBehaviour",
+"language": "GDScript",
+"path": "res://src/game/weapon_logic/projectiles/behaviours/detection_behaviour/spherearea_detection_behaviour.gd"
+}, {
+"base": "MotionBehaviour",
+"class": "StaticMotionBehaviour",
+"language": "GDScript",
+"path": "res://src/game/weapon_logic/projectiles/behaviours/motion_behaviour/static_motion_behaviour.gd"
 }, {
 "base": "Resource",
 "class": "TriggerData",
 "language": "GDScript",
 "path": "res://src/game/weapon_logic/trigger_mechanism/trigger_data.gd"
 }, {
-"base": "Object",
+"base": "Reference",
 "class": "TriggerMechanism",
 "language": "GDScript",
 "path": "res://src/game/weapon_logic/trigger_mechanism/trigger_mechanism.gd"
@@ -321,6 +381,7 @@ _global_script_class_icons={
 "CameraBehavior": "",
 "CameraStack": "res://resources/editor/custom_classes_icons/camera_lens.svg",
 "Cameras": "",
+"CastDetectionBehaviour": "",
 "Character": "",
 "CharacterActions": "",
 "CharacterController": "",
@@ -330,12 +391,15 @@ _global_script_class_icons={
 "ClipMagazineData": "",
 "ClipMechanism": "",
 "DataContainer": "",
+"DelayLifeBehaviour": "",
+"DetectionBehaviour": "",
 "Equipable": "",
 "EquipableAttachPoint": "",
 "EquipableData": "",
 "EquipableHandler": "",
 "ExpandingInventory": "",
 "GroupSlot": "",
+"HitBehaviour": "",
 "InputListener": "",
 "InstanceContainer": "",
 "Inventory": "",
@@ -344,7 +408,9 @@ _global_script_class_icons={
 "ItemContainer": "",
 "ItemDB": "",
 "Label3D": "",
+"LifeBehaviour": "",
 "Logger": "",
+"MotionBehaviour": "",
 "MovementAction": "",
 "MovementState": "",
 "MovementStateHelper": "",
@@ -353,6 +419,7 @@ _global_script_class_icons={
 "MovementTransitionConditional": "",
 "MuzzleData": "",
 "MuzzleMechanism": "",
+"OneFrameLifeBehaviour": "",
 "Pickable": "",
 "Player": "",
 "PlayerArmsController": "",
@@ -360,9 +427,14 @@ _global_script_class_icons={
 "PlayerEquipableHandler": "",
 "PlayerSpawner": "res://resources/editor/custom_classes_icons/player_spawner.svg",
 "Projectile": "",
+"ProjectileBehaviour": "",
 "Raycaster": "",
+"RocketMotionBehaviour": "",
 "RocketProjectile": "",
+"SimpleProjectile": "",
 "Slot": "",
+"SphereAreaDetectionBehaviour": "",
+"StaticMotionBehaviour": "",
 "TriggerData": "",
 "TriggerMechanism": "",
 "TriggerSingleFire": "",
@@ -387,45 +459,45 @@ Autoload="res://src/game/engine/service/autoload/autoload.gd"
 
 ui_accept={
 "deadzone": 0.5,
-"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":16777221,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":16777221,"unicode":0,"echo":false,"script":null)
  ]
 }
 ui_left={
 "deadzone": 0.5,
-"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":16777231,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":16777231,"unicode":0,"echo":false,"script":null)
 , Object(InputEventJoypadButton,"resource_local_to_scene":false,"resource_name":"","device":0,"button_index":14,"pressure":0.0,"pressed":false,"script":null)
-, Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":81,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
+, Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":81,"unicode":0,"echo":false,"script":null)
  ]
 }
 ui_right={
 "deadzone": 0.5,
-"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":16777233,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":16777233,"unicode":0,"echo":false,"script":null)
 , Object(InputEventJoypadButton,"resource_local_to_scene":false,"resource_name":"","device":0,"button_index":15,"pressure":0.0,"pressed":false,"script":null)
-, Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":68,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
+, Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":68,"unicode":0,"echo":false,"script":null)
  ]
 }
 ui_up={
 "deadzone": 0.5,
-"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":16777232,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":16777232,"unicode":0,"echo":false,"script":null)
 , Object(InputEventJoypadButton,"resource_local_to_scene":false,"resource_name":"","device":0,"button_index":12,"pressure":0.0,"pressed":false,"script":null)
-, Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":90,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
+, Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":90,"unicode":0,"echo":false,"script":null)
  ]
 }
 ui_down={
 "deadzone": 0.5,
-"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":16777234,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":16777234,"unicode":0,"echo":false,"script":null)
 , Object(InputEventJoypadButton,"resource_local_to_scene":false,"resource_name":"","device":0,"button_index":13,"pressure":0.0,"pressed":false,"script":null)
-, Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":83,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
+, Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":83,"unicode":0,"echo":false,"script":null)
  ]
 }
 ui_shift={
 "deadzone": 0.5,
-"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":16777237,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":16777237,"unicode":0,"echo":false,"script":null)
  ]
 }
 ui_ctrl={
 "deadzone": 0.5,
-"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":16777238,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":16777238,"unicode":0,"echo":false,"script":null)
  ]
 }
 ui_lclick={
@@ -440,7 +512,7 @@ ui_rclick={
 }
 reload={
 "deadzone": 0.5,
-"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":82,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":82,"unicode":0,"echo":false,"script":null)
  ]
 }
 

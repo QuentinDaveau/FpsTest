@@ -30,7 +30,7 @@ var _current_usage: int
 # won't be set), thus we have to use notifications (that apparently won't propagate
 # to children, may cause issues in the future ?)
 func _notification(notif: int) -> void:
-	if not notif == NOTIFICATION_INSTANCED: return
+	if notif != NOTIFICATION_INSTANCED: return
 	_set_data(null)
 
 

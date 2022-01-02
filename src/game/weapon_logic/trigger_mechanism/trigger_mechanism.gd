@@ -1,12 +1,10 @@
-extends Object
+extends Reference
 class_name TriggerMechanism
 
 
 """
 Class dedicated to handle the shooting behaviour when the weapon is triggered
 (Single-shot, auto, burst, charge...)
-TEMP: Root class which handle the interaction between the ammo and barrel ? 
---> No, the weapon should handle this. this class should only raise signals
 """
 
 signal action()

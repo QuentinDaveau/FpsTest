@@ -27,7 +27,7 @@ clips = [ SubResource( 1 ) ]
 muzzles = [ SubResource( 2 ) ]
 
 [sub_resource type="CubeMesh" id=5]
-size = Vector3( 0.5, 0.5, 2 )
+size = Vector3( 0.1, 0.1, 0.7 )
 
 [node name="TestWeapon" instance=ExtResource( 1 )]
 script = ExtResource( 4 )

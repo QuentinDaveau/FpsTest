@@ -1,20 +1,24 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=7 format=2]
 
-[ext_resource path="res://src/game/weapon_logic/projectile/rocket_projectile.gd" type="Script" id=1]
+[ext_resource path="res://src/game/weapon_logic/projectiles/projectile/simple_projectile.gd" type="Script" id=1]
+[ext_resource path="res://data/projectiles/test_projectile/hit.tres" type="Resource" id=2]
+[ext_resource path="res://data/projectiles/test_projectile/delay_life.tres" type="Resource" id=3]
+[ext_resource path="res://data/projectiles/test_projectile/rocket_motion.tres" type="Resource" id=4]
+[ext_resource path="res://data/projectiles/test_projectile/sphere_area.tres" type="Resource" id=5]
 
-[sub_resource type="SphereShape" id=1]
+[sub_resource type="SphereMesh" id=1]
+radius = 0.1
+height = 0.2
+radial_segments = 16
+rings = 8
 
-[sub_resource type="SphereMesh" id=2]
-
-[node name="RocketProjectile" type="Spatial"]
+[node name="TestProjectile" type="Spatial"]
 script = ExtResource( 1 )
-_collision_area_path = NodePath("Area")
-
-[node name="Area" type="Area" parent="."]
-
-[node name="CollisionShape" type="CollisionShape" parent="Area"]
-shape = SubResource( 1 )
+_life_behaviour = ExtResource( 3 )
+_motion_behaviour = ExtResource( 4 )
+_detection_behaviour = ExtResource( 5 )
+_hit_behaviour = ExtResource( 2 )
 
 [node name="MeshInstance" type="MeshInstance" parent="."]
-mesh = SubResource( 2 )
+mesh = SubResource( 1 )
 material/0 = null

@@ -1,6 +1,6 @@
 [gd_resource type="ShaderMaterial" load_steps=3 format=2]
 
-[sub_resource type="Shader" id=10]
+[sub_resource type="Shader" id=1]
 resource_local_to_scene = true
 code = "shader_type spatial;
 
@@ -39,11 +39,11 @@ void fragment()
 
 "
 
-[sub_resource type="StreamTexture" id=9]
+[sub_resource type="StreamTexture" id=2]
 flags = 23
 load_path = "res://.import/tile.png-6e3017d9f9497b4575a1b2eeb2ce6d79.s3tc.stex"
 
 [resource]
-shader = SubResource( 10 )
+shader = SubResource( 1 )
 shader_param/brightness = 0.1
-shader_param/grid_texture = SubResource( 9 )
+shader_param/grid_texture = SubResource( 2 )

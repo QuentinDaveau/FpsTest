@@ -5,7 +5,7 @@
 [ext_resource path="res://src/game/in_world_logic/pickable/pickable.gd" type="Script" id=3]
 [ext_resource path="res://assets/shaders/blocking_shader.tres" type="Material" id=4]
 
-[sub_resource type="Shader" id=3]
+[sub_resource type="Shader" id=1]
 resource_local_to_scene = true
 code = "shader_type spatial;
 
@@ -44,25 +44,25 @@ void fragment()
 
 "
 
-[sub_resource type="StreamTexture" id=4]
+[sub_resource type="StreamTexture" id=2]
 flags = 23
 load_path = "res://.import/tile.png-6e3017d9f9497b4575a1b2eeb2ce6d79.s3tc.stex"
 
-[sub_resource type="ShaderMaterial" id=5]
+[sub_resource type="ShaderMaterial" id=3]
 resource_local_to_scene = true
-shader = SubResource( 3 )
+shader = SubResource( 1 )
 shader_param/brightness = 0.1
-shader_param/grid_texture = SubResource( 4 )
+shader_param/grid_texture = SubResource( 2 )
 
-[sub_resource type="CubeMesh" id=6]
+[sub_resource type="CubeMesh" id=4]
 resource_local_to_scene = true
-material = SubResource( 5 )
+material = SubResource( 3 )
 
-[sub_resource type="CubeMesh" id=7]
+[sub_resource type="CubeMesh" id=5]
 resource_local_to_scene = true
 material = ExtResource( 4 )
 
-[sub_resource type="Shader" id=8]
+[sub_resource type="Shader" id=6]
 resource_local_to_scene = true
 code = "shader_type spatial;
 
@@ -101,20 +101,20 @@ void fragment()
 
 "
 
-[sub_resource type="StreamTexture" id=9]
+[sub_resource type="StreamTexture" id=7]
 flags = 23
 load_path = "res://.import/tile.png-6e3017d9f9497b4575a1b2eeb2ce6d79.s3tc.stex"
 
-[sub_resource type="ShaderMaterial" id=10]
-shader = SubResource( 8 )
+[sub_resource type="ShaderMaterial" id=8]
+shader = SubResource( 6 )
 shader_param/brightness = 1.0
-shader_param/grid_texture = SubResource( 9 )
+shader_param/grid_texture = SubResource( 7 )
 
-[sub_resource type="CubeMesh" id=11]
+[sub_resource type="CubeMesh" id=9]
 resource_local_to_scene = true
-material = SubResource( 10 )
+material = SubResource( 8 )
 
-[sub_resource type="Shader" id=12]
+[sub_resource type="Shader" id=10]
 resource_local_to_scene = true
 code = "shader_type spatial;
 
@@ -153,21 +153,21 @@ void fragment()
 
 "
 
-[sub_resource type="StreamTexture" id=13]
+[sub_resource type="StreamTexture" id=11]
 flags = 23
 load_path = "res://.import/tile.png-6e3017d9f9497b4575a1b2eeb2ce6d79.s3tc.stex"
 
-[sub_resource type="ShaderMaterial" id=14]
+[sub_resource type="ShaderMaterial" id=12]
 resource_local_to_scene = true
-shader = SubResource( 12 )
+shader = SubResource( 10 )
 shader_param/brightness = 1.0
-shader_param/grid_texture = SubResource( 13 )
+shader_param/grid_texture = SubResource( 11 )
 
-[sub_resource type="CubeMesh" id=15]
+[sub_resource type="CubeMesh" id=13]
 resource_local_to_scene = true
-material = SubResource( 14 )
+material = SubResource( 12 )
 
-[sub_resource type="Shader" id=16]
+[sub_resource type="Shader" id=14]
 resource_local_to_scene = true
 code = "shader_type spatial;
 
@@ -206,17 +206,17 @@ void fragment()
 
 "
 
-[sub_resource type="ShaderMaterial" id=17]
+[sub_resource type="ShaderMaterial" id=15]
 resource_local_to_scene = true
-shader = SubResource( 16 )
+shader = SubResource( 14 )
 shader_param/brightness = 1.0
-shader_param/grid_texture = SubResource( 13 )
+shader_param/grid_texture = SubResource( 11 )
 
-[sub_resource type="CubeMesh" id=18]
+[sub_resource type="CubeMesh" id=16]
 resource_local_to_scene = true
-material = SubResource( 17 )
+material = SubResource( 15 )
 
-[sub_resource type="Shader" id=19]
+[sub_resource type="Shader" id=17]
 resource_local_to_scene = true
 code = "shader_type spatial;
 
@@ -255,17 +255,17 @@ void fragment()
 
 "
 
-[sub_resource type="ShaderMaterial" id=20]
+[sub_resource type="ShaderMaterial" id=18]
 resource_local_to_scene = true
-shader = SubResource( 19 )
+shader = SubResource( 17 )
 shader_param/brightness = 1.0
-shader_param/grid_texture = SubResource( 13 )
+shader_param/grid_texture = SubResource( 11 )
 
-[sub_resource type="CubeMesh" id=21]
+[sub_resource type="CubeMesh" id=19]
 resource_local_to_scene = true
-material = SubResource( 20 )
+material = SubResource( 18 )
 
-[sub_resource type="Shader" id=22]
+[sub_resource type="Shader" id=20]
 resource_local_to_scene = true
 code = "shader_type spatial;
 
@@ -304,17 +304,17 @@ void fragment()
 
 "
 
-[sub_resource type="ShaderMaterial" id=23]
+[sub_resource type="ShaderMaterial" id=21]
 resource_local_to_scene = true
-shader = SubResource( 22 )
+shader = SubResource( 20 )
 shader_param/brightness = 1.0
-shader_param/grid_texture = SubResource( 13 )
+shader_param/grid_texture = SubResource( 11 )
 
-[sub_resource type="CubeMesh" id=24]
+[sub_resource type="CubeMesh" id=22]
 resource_local_to_scene = true
-material = SubResource( 23 )
+material = SubResource( 21 )
 
-[sub_resource type="Shader" id=25]
+[sub_resource type="Shader" id=23]
 resource_local_to_scene = true
 code = "shader_type spatial;
 
@@ -353,17 +353,17 @@ void fragment()
 
 "
 
-[sub_resource type="ShaderMaterial" id=26]
+[sub_resource type="ShaderMaterial" id=24]
 resource_local_to_scene = true
-shader = SubResource( 25 )
+shader = SubResource( 23 )
 shader_param/brightness = 1.0
-shader_param/grid_texture = SubResource( 13 )
+shader_param/grid_texture = SubResource( 11 )
 
-[sub_resource type="CubeMesh" id=27]
+[sub_resource type="CubeMesh" id=25]
 resource_local_to_scene = true
-material = SubResource( 26 )
+material = SubResource( 24 )
 
-[sub_resource type="Shader" id=28]
+[sub_resource type="Shader" id=26]
 resource_local_to_scene = true
 code = "shader_type spatial;
 
@@ -402,17 +402,17 @@ void fragment()
 
 "
 
-[sub_resource type="ShaderMaterial" id=29]
+[sub_resource type="ShaderMaterial" id=27]
 resource_local_to_scene = true
-shader = SubResource( 28 )
+shader = SubResource( 26 )
 shader_param/brightness = 1.0
-shader_param/grid_texture = SubResource( 13 )
+shader_param/grid_texture = SubResource( 11 )
 
-[sub_resource type="CubeMesh" id=30]
+[sub_resource type="CubeMesh" id=28]
 resource_local_to_scene = true
-material = SubResource( 29 )
+material = SubResource( 27 )
 
-[sub_resource type="Shader" id=31]
+[sub_resource type="Shader" id=29]
 resource_local_to_scene = true
 code = "shader_type spatial;
 
@@ -451,21 +451,21 @@ void fragment()
 
 "
 
-[sub_resource type="ShaderMaterial" id=32]
+[sub_resource type="ShaderMaterial" id=30]
 resource_local_to_scene = true
-shader = SubResource( 31 )
+shader = SubResource( 29 )
 shader_param/brightness = 1.0
-shader_param/grid_texture = SubResource( 13 )
+shader_param/grid_texture = SubResource( 11 )
 
-[sub_resource type="CubeMesh" id=33]
+[sub_resource type="CubeMesh" id=31]
 resource_local_to_scene = true
-material = SubResource( 32 )
+material = SubResource( 30 )
 
-[sub_resource type="ProceduralSky" id=1]
+[sub_resource type="ProceduralSky" id=32]
 
-[sub_resource type="Environment" id=2]
+[sub_resource type="Environment" id=33]
 background_mode = 2
-background_sky = SubResource( 1 )
+background_sky = SubResource( 32 )
 ambient_light_color = Color( 0.796078, 0.929412, 1, 1 )
 ambient_light_energy = 0.44
 ambient_light_sky_contribution = 0.0
@@ -478,75 +478,75 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.001, 0.001, 0.001 )
 
 [node name="Floor" parent="Geometry" instance=ExtResource( 1 )]
 transform = Transform( 100, 0, 0, 0, 0.1, 0, 0, 0, 100, 0, -0.1, 0 )
-mesh = SubResource( 6 )
+mesh = SubResource( 4 )
 skeleton = NodePath("../..")
 
 [node name="Walls" type="Spatial" parent="Geometry"]
 
 [node name="Wall" parent="Geometry/Walls" instance=ExtResource( 1 )]
 transform = Transform( 0.1, 0, 0, 0, 6, 0, 0, 0, 100, -99.8656, 6, 0 )
-mesh = SubResource( 7 )
+mesh = SubResource( 5 )
 skeleton = NodePath("../../..")
 
 [node name="Wall2" parent="Geometry/Walls" instance=ExtResource( 1 )]
 transform = Transform( -4.37114e-09, 0, 100, 0, 6, 0, -0.1, 0, -4.37114e-06, 0.134429, 6, 100 )
-mesh = SubResource( 7 )
+mesh = SubResource( 5 )
 skeleton = NodePath("../../..")
 
 [node name="Wall3" parent="Geometry/Walls" instance=ExtResource( 1 )]
 transform = Transform( -4.37114e-09, 0, 100, 0, 6, 0, -0.1, 0, -4.37114e-06, 0.134429, 6, -100 )
-mesh = SubResource( 7 )
+mesh = SubResource( 5 )
 skeleton = NodePath("../../..")
 
 [node name="Wall4" parent="Geometry/Walls" instance=ExtResource( 1 )]
 transform = Transform( 0.1, 0, 0, 0, 6, 0, 0, 0, 100, 100.134, 6, 0 )
-mesh = SubResource( 7 )
+mesh = SubResource( 5 )
 skeleton = NodePath("../../..")
 
 [node name="Structures" type="Spatial" parent="Geometry"]
 
 [node name="Block2" parent="Geometry/Structures" instance=ExtResource( 1 )]
 transform = Transform( 1, 0, 0, 0, 3.32448, 0.707107, 0, -3.32448, 0.707107, 0, -0.0300579, -0.366341 )
-mesh = SubResource( 11 )
+mesh = SubResource( 9 )
 skeleton = NodePath("../../..")
 
 [node name="Block9" parent="Geometry/Structures" instance=ExtResource( 1 )]
 transform = Transform( 1, 0, 0, 0, 3.60158, 0.642788, 0, -3.02208, 0.766045, 5.99807, -0.243762, -0.714413 )
-mesh = SubResource( 15 )
+mesh = SubResource( 13 )
 skeleton = NodePath("../../..")
 
 [node name="Block5" parent="Geometry/Structures" instance=ExtResource( 1 )]
 transform = Transform( 1, 0, 0, 0, 4.07164, 0.5, 0, -2.35076, 0.866025, -2.03984, -0.568395, -1.45691 )
-mesh = SubResource( 18 )
+mesh = SubResource( 16 )
 skeleton = NodePath("../../..")
 
 [node name="Block7" parent="Geometry/Structures" instance=ExtResource( 1 )]
 transform = Transform( 1, 0, 0, 0, 4.54132, 0.258819, 0, -1.21684, 0.965926, -3.9838, -0.80703, -2.68583 )
-mesh = SubResource( 21 )
+mesh = SubResource( 19 )
 skeleton = NodePath("../../..")
 
 [node name="Block8" parent="Geometry/Structures" instance=ExtResource( 1 )]
 transform = Transform( 1, 0, 0, 0, 4.70153, 1.49012e-08, 0, -1.19209e-07, 1, -5.9688, -0.692979, -3.92429 )
-mesh = SubResource( 24 )
+mesh = SubResource( 22 )
 skeleton = NodePath("../../..")
 
 [node name="Block4" parent="Geometry/Structures" instance=ExtResource( 1 )]
 transform = Transform( 1, 0, 0, 0, 3.1551, 0.866025, 0, -5.46479, 0.5, 2.06006, -0.0300579, 1.98539 )
-mesh = SubResource( 27 )
+mesh = SubResource( 25 )
 skeleton = NodePath("../../..")
 
 [node name="Block6" parent="Geometry/Structures" instance=ExtResource( 1 )]
 transform = Transform( 1, 0, 0, 0, 3.03912, 0.965926, 0, -11.3422, 0.258819, 4.06006, -0.0300579, 8.1245 )
-mesh = SubResource( 30 )
+mesh = SubResource( 28 )
 skeleton = NodePath("../../..")
 
 [node name="Block3" parent="Geometry/Structures" instance=ExtResource( 1 )]
 transform = Transform( 7.01, 0, 0, 0, -2.20305e-07, 1.5, 0, -5.04, -6.55671e-08, 0, 2.49068, -8 )
-mesh = SubResource( 33 )
+mesh = SubResource( 31 )
 skeleton = NodePath("../../..")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
-environment = SubResource( 2 )
+environment = SubResource( 33 )
 
 [node name="DirectionalLight" type="DirectionalLight" parent="."]
 transform = Transform( 0.892979, 0.101771, 0.438442, -0.444396, 0.353917, 0.822955, -0.0714194, -0.929724, 0.361267, -7.25267e-08, 8.69215, 4.0431e-07 )

@@ -3,12 +3,11 @@ class_name RocketProjectile
 tool
 
 """
-Basic projectile class which is dedicated to spawn an object and move it until
-it collides
+Self-propelled projectile that moves in a straight line until hitting an obstacle
 """
 
 # TEMP: This will be set in a data class
-const SPEED: float = 10.0
+const SPEED: float = 100.0
 
 export(NodePath) var _collision_area_path
 
@@ -27,11 +26,17 @@ func _ready() -> void:
 
 func _handle_spawn_logic() -> void:
 	_collision_area = get_node(_collision_area_path)
+	_collision_area.connect("body_entered", self, "_on_body_hit")
 
 
 
 func _handle_process_logic(delta: float) -> void:
 	translate(Vector3.FORWARD * SPEED * delta)
+
+
+
+func _on_body_hit(body: Node) -> void:
+	pass
 
 
 

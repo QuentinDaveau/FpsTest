@@ -1,7 +1,6 @@
-extends ArmsBehaviour
+extends CameraBehavior
 
-
-
+var _player_controller: PlayerController
 var _tween: Tween
 
 
@@ -14,7 +13,7 @@ func _ready() -> void:
 
 
 # TEMP: Height and crouch height, as well as crouch speed will be set in a params file
-func _set_arms_height(var is_crouching: bool) -> void:
+func _set_camera_height(var is_crouching: bool) -> void:
 	var stand_height := 1.8
 	var crouch_height := 0.9
 	var crouch_speed := 0.4
@@ -39,4 +38,4 @@ func _get_current_height_ratio(to_crouch: bool) -> float:
 
 # TEMP: Dirty magic strings
 func _on_player_state_changed(var new_state: String) -> void:
-	_set_arms_height(new_state.begins_with("Crouch"))
+	_set_camera_height(new_state.begins_with("Crouch"))

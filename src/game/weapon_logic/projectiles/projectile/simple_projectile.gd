@@ -2,7 +2,7 @@ extends Projectile
 class_name SimpleProjectile
 
 
-
+# TEMP: Very dirty class (temporary)
 
 # Since the Projectile is expected to be a packed scene, we cannot use init (variables
 # won't be set), thus we have to use notifications (that apparently won't propagate
@@ -10,7 +10,8 @@ class_name SimpleProjectile
 func _notification(notif: int) -> void:
 	if notif != NOTIFICATION_INSTANCED: return
 	_life_behaviour.connect("decayed", self, "_on_decay")
-	_detection_behaviour.connect("hit", _hit_behaviour, "process_hit")
+	_detection_behaviour.connect("hit", _hit_behaviour, "on_hit")
+	_hit_behaviour.connect("hit_done", self, "_on_decay")
 
 
 # Quite dirty. Maybe pass behaviours in an array ? (to have multiple of the same

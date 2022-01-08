@@ -21,3 +21,9 @@ func _handle_spawn() -> void:
 	shape.shape = sphere
 	_collision_area.add_child(shape)
 	shape.owner = _owner_node
+	_collision_area.connect("body_entered", self, "_on_body_entered")
+
+
+
+func _on_body_entered(body: Node) -> void:
+	_on_hit()

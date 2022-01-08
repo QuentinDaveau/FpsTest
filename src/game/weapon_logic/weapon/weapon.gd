@@ -10,6 +10,9 @@ interface between the differents components and the users (IA, player...)
 
 const MUZZLE_LOCATION: String = "MuzzleLocation"
 
+# TEMP: Shooting effects will be later directly defined in the muzzle data
+signal shot()
+
 export(Resource) var _weapon_data: Resource setget _check_weapon_data_type
 
 var _mechanisms := []
@@ -37,11 +40,18 @@ func _apply_data() -> void:
 	var m
 	for muzzle in _weapon_data.muzzles:
 		m = MuzzleMechanism.new(get_node(MUZZLE_LOCATION))
+		# TEMP for shake test
+		m.connect("shot", self, "_on_shot")
 		_mechanisms.append(m)
 	for trigger in _weapon_data.triggers:
 		var t := TriggerSingleFire.new(trigger)
 		t.connect("action", self, "_on_trigger_action", [t, c, m])
 		_mechanisms.append(t)
+
+
+# TEMP
+func _on_shot() -> void:
+	emit_signal("shot")
 
 
 

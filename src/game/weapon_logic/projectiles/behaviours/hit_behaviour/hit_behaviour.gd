@@ -6,8 +6,14 @@ Behaviour dedicated to process action to apply on hit (explode, damage...)
 """
 
 
+signal hit_done()
 
 
-# TEMP: will be completed with damage logic in the future
 func process_hit() -> void:
+	pass
+
+
+
+# TEMP: will be completed with damage info (who is hit...) in the future
+func on_hit() -> void:
 	pass

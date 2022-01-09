@@ -2,7 +2,8 @@ extends ArmsBehaviour
 
 
 """
-Makes the weapon follow the camera forward
+Makes the weapon follow the camera forward. Does not take camera effects into account
+(shake, recoil...)
 """
 
 

@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://assets/equipables/Equipable.tscn" type="PackedScene" id=1]
 [ext_resource path="res://src/game/weapon_logic/clip_mechanism/clip_magazine_data.gd" type="Script" id=2]
@@ -8,6 +8,8 @@
 [ext_resource path="res://src/game/weapon_logic/trigger_mechanism/trigger_single_fire_data.gd" type="Script" id=6]
 [ext_resource path="res://src/game/player_logic/camera_stack/camera_behaviors/behaviors/camera_shake/shake_data.gd" type="Script" id=7]
 [ext_resource path="res://src/game/player_logic/camera_stack/camera_behaviors/behaviors/camera_shake/camera_shake_emitter.gd" type="Script" id=8]
+[ext_resource path="res://src/game/player_logic/camera_stack/camera_behaviors/behaviors/camera_recoil/camera_recoil_emitter.gd" type="Script" id=9]
+[ext_resource path="res://src/game/player_logic/camera_stack/camera_behaviors/behaviors/camera_recoil/recoil_data.gd" type="Script" id=10]
 
 [sub_resource type="Resource" id=1]
 script = ExtResource( 2 )
@@ -35,9 +37,20 @@ size = Vector3( 0.1, 0.1, 0.7 )
 script = ExtResource( 7 )
 direction = Vector2( 0, 1 )
 strength = 0.02
-damp = 0.4
+damp = 0.6
 random = 0.1
 speed = 0.01
+
+[sub_resource type="Resource" id=9]
+script = ExtResource( 10 )
+recoil_speed = 0.02
+return_speed = 0.2
+direction = Vector2( 0, 1 )
+random = 0.05
+strength = 0.1
+max_angle = 0.2
+rotate_z_axis = true
+rotation_amount = 1.0
 
 [node name="TestWeapon" instance=ExtResource( 1 )]
 script = ExtResource( 4 )
@@ -54,4 +67,9 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.4 )
 script = ExtResource( 8 )
 _shake_data = SubResource( 6 )
 
+[node name="CameraRecoilEmitter" type="Node" parent="." index="6"]
+script = ExtResource( 9 )
+_recoil_data = SubResource( 9 )
+
 [connection signal="shot" from="." to="CameraShakeEmitter" method="_shake_camera"]
+[connection signal="shot" from="." to="CameraRecoilEmitter" method="_recoil_camera"]

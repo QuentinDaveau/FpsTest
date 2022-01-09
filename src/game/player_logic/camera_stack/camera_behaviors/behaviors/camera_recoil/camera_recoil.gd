@@ -1,41 +1,54 @@
 extends CameraBehavior
+class_name CameraRecoil
 
-var _player_controller: PlayerController
-var _tween: Tween
+"""
+Behaviour dedicated to apply a recoil to the player's camera
+"""
 
 
 
+var _ongoing_recoils := {}
+
+
+# TEMP: See if there isn't a better way than listening for global signals
+# (good enouth for test, but will be an issue in the future ?)
 func _ready() -> void:
-	_tween = Tween.new()
-	add_child(_tween)
-	Service.fetch(Service.TYPE.SIGNAL).listen(self, "player_state_changed", "_on_player_state_changed")
+	Service.fetch(Service.TYPE.SIGNAL).listen(self, "recoil_camera", "_on_recoil_camera")
 
 
 
-# TEMP: Height and crouch height, as well as crouch speed will be set in a params file
-func _set_camera_height(var is_crouching: bool) -> void:
-	var stand_height := 1.8
-	var crouch_height := 0.9
-	var crouch_speed := 0.4
-	var current_height := translation.y
-	var target_height := crouch_height if is_crouching else stand_height
-	if target_height == current_height:
+func _process(delta: float) -> void:
+	var basis := Basis()
+	for recoil in _ongoing_recoils.values():
+		basis *= recoil.rotation
+	transform.basis = basis
+
+
+
+func _add_recoil(recoil_data: RecoilData) -> void:
+	if _add_to_existing_recoil(recoil_data):
 		return
-	_tween.stop_all()
-	_tween.interpolate_property(self, "translation:y", current_height, \
-			target_height, _get_current_height_ratio(is_crouching) * crouch_speed, \
-			Tween.TRANS_QUINT, Tween.EASE_OUT)
-	_tween.start()
+	var _recoiler = BasisRecoiler.new(recoil_data)
+	_recoiler.connect("recoil_all_done", self, "_on_recoil_done", [recoil_data.source])
+	_ongoing_recoils[recoil_data.source] = _recoiler
+	add_child(_recoiler)
 
 
 
-# TEMP: Height and crouch height will be set in a params file
-func _get_current_height_ratio(to_crouch: bool) -> float:
-	var ratio = clamp((translation.y - 0.9) / (1.8 - 0.9), 0.0, 1.0)
-	return ratio if to_crouch else 1.0 - ratio
+func _add_to_existing_recoil(data: RecoilData) -> bool:
+	if _ongoing_recoils.has(data.source):
+		_ongoing_recoils.get(data.source).add_recoil(data)
+		return true
+	return false
 
 
 
-# TEMP: Dirty magic strings
-func _on_player_state_changed(var new_state: String) -> void:
-	_set_camera_height(new_state.begins_with("Crouch"))
+func _on_recoil_done(recoil_source: CameraRecoilEmitter) -> void:
+	_ongoing_recoils.erase(recoil_source)
+
+
+
+func _on_recoil_camera(data: RecoilData) -> void:
+	_add_recoil(data)
+
+

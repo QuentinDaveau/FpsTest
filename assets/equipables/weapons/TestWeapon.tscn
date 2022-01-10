@@ -44,13 +44,13 @@ speed = 0.01
 [sub_resource type="Resource" id=9]
 script = ExtResource( 10 )
 recoil_speed = 0.02
-return_speed = 0.2
+return_speed = 0.15
 direction = Vector2( 0, 1 )
 random = 0.05
-strength = 0.1
-max_angle = 0.2
+strength = 0.06
+max_angle = 0.1
 rotate_z_axis = true
-rotation_amount = 1.0
+rotation_amount = 0.5
 
 [node name="TestWeapon" instance=ExtResource( 1 )]
 script = ExtResource( 4 )

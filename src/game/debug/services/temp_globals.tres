@@ -1,0 +1,23 @@
+[gd_resource type="Resource" load_steps=4 format=2]
+
+[ext_resource path="res://src/game/debug/services/temp_globals.gd" type="Script" id=1]
+
+[sub_resource type="Curve" id=1]
+min_value = -1.0
+bake_resolution = 25
+_data = [ Vector2( 0, 0 ), 0.0, -8.0, 0, 0, Vector2( 0.2, -1 ), 0.0, 0.0, 0, 0, Vector2( 0.3, -1 ), 0.0, 0.0, 0, 0, Vector2( 0.490826, 0 ), 7.32773, 7.32773, 0, 0, Vector2( 0.7, 1 ), 0.0, 0.0, 0, 0, Vector2( 0.8, 1 ), 0.0, 0.0, 0, 0, Vector2( 1, 0 ), -8.0, 0.0, 0, 0 ]
+
+[sub_resource type="Curve" id=2]
+min_value = -1.0
+bake_resolution = 25
+_data = [ Vector2( 0, 0 ), 0.0, 0.0, 0, 0, Vector2( 0.242718, -1 ), -7.7906, 7.30364, 0, 0, Vector2( 0.5, 0 ), 0.0, 0.0, 0, 0, Vector2( 0.757282, -1 ), -6.49212, 7.35714, 0, 0, Vector2( 1, 0 ), 0.0, 0.0, 0, 0 ]
+
+[resource]
+script = ExtResource( 1 )
+move_x_bobbing = SubResource( 1 )
+move_y_bobbing = SubResource( 2 )
+move_x_amplitude = 0.001
+move_y_amplitude = 0.004
+move_speed = 0.9
+visuals_speed_run_coeff = 0.6
+visuals_speed_crouch_coeff = 1.4

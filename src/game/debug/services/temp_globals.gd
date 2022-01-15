@@ -15,3 +15,14 @@ export(float) var move_speed: float
 
 export(float) var visuals_speed_run_coeff: float = 0.8
 export(float) var visuals_speed_crouch_coeff: float = 1.2
+
+
+
+export(Curve) var jump_bobbing: Curve
+export(Curve) var land_bobbing: Curve
+
+export(float) var jump_amplitude: float # Amplitude in rads
+export(float) var land_amplitude: float
+
+export(float) var jump_speed: float
+export(float) var land_speed: float

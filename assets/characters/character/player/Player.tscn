@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=2]
+[gd_scene load_steps=26 format=2]
 
 [ext_resource path="res://assets/characters/character/Character.tscn" type="PackedScene" id=1]
 [ext_resource path="res://src/game/player_logic/camera_stack/camera_stack.gd" type="Script" id=2]
@@ -24,13 +24,14 @@
 [ext_resource path="res://src/game/player_logic/camera_stack/camera_behaviors/behaviors/camera_shake/camera_shake.gd" type="Script" id=22]
 [ext_resource path="res://src/game/player_logic/camera_stack/camera_behaviors/behaviors/camera_recoil/camera_recoil.gd" type="Script" id=23]
 [ext_resource path="res://src/game/player_logic/camera_stack/camera_behaviors/behaviors/camera_move_bobbing.gd" type="Script" id=24]
+[ext_resource path="res://src/game/player_logic/camera_stack/camera_behaviors/behaviors/camera_jump_bobbing.gd" type="Script" id=25]
 
 [node name="Player" instance=ExtResource( 1 )]
 script = ExtResource( 5 )
 
 [node name="CameraStack" type="Spatial" parent="." index="1"]
 script = ExtResource( 2 )
-behaviors = [ ExtResource( 14 ), ExtResource( 3 ), ExtResource( 23 ), ExtResource( 22 ), ExtResource( 24 ) ]
+behaviors = [ ExtResource( 14 ), ExtResource( 3 ), ExtResource( 23 ), ExtResource( 22 ), ExtResource( 24 ), ExtResource( 25 ) ]
 
 [node name="ArmsStack" type="Spatial" parent="." index="2"]
 script = ExtResource( 16 )

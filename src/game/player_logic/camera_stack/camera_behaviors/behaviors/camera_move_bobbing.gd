@@ -15,7 +15,7 @@ func _ready() -> void:
 	set_process(false)
 
 
-
+# TEMP: Clean this class
 func _process(delta: float) -> void:
 	# Missing crouch speed mult
 	var _speed = TempGlobals.r.move_speed * (TempGlobals.r.visuals_speed_run_coeff if _current_state == STATES.RUN else (TempGlobals.r.visuals_speed_crouch_coeff if _current_state == STATES.CROUCH else 1.0))

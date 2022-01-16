@@ -36,4 +36,4 @@ land_bobbing = SubResource( 4 )
 jump_amplitude = 0.02
 land_amplitude = 0.02
 jump_speed = 0.3
-land_speed = 0.2
+land_speed = 0.15

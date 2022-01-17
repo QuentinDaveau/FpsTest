@@ -19,6 +19,16 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://src/game/player_logic/arms_stack/arms_behaviour/arms_behaviour.gd"
 }, {
+"base": "ArmsBehaviour",
+"class": "ArmsRecoil",
+"language": "GDScript",
+"path": "res://src/game/player_logic/arms_stack/arms_behaviour/behaviours/arms_recoil/arms_recoil.gd"
+}, {
+"base": "Node",
+"class": "ArmsRecoilEmitter",
+"language": "GDScript",
+"path": "res://src/game/player_logic/arms_stack/arms_behaviour/behaviours/arms_recoil/arms_recoil_emitter.gd"
+}, {
 "base": "Spatial",
 "class": "ArmsStack",
 "language": "GDScript",
@@ -432,6 +442,8 @@ _global_script_classes=[ {
 _global_script_class_icons={
 "ArmsAction": "",
 "ArmsBehaviour": "",
+"ArmsRecoil": "",
+"ArmsRecoilEmitter": "",
 "ArmsStack": "",
 "ArmsState": "",
 "ArmsStateHelper": "",

@@ -15,8 +15,9 @@ func _ready() -> void:
 
 # TEMP: Will have to set parameters in parameters file
 func _process(delta: float) -> void:
-	var delta_basis := (_current_forward * _previous_forward.transposed()).get_euler() / 4.0
-	var target_forward := Basis(Vector3(delta_basis.x + delta_basis.z, delta_basis.y, delta_basis.y / 2.0))
+	var y_basis := Basis(Vector3.UP, -_previous_forward.get_euler().y)
+	var delta_basis := (((y_basis * _current_forward) * (y_basis * _previous_forward).inverse()).get_euler() / delta) / 200.0
+	var target_forward := Basis(Vector3(delta_basis.x, delta_basis.y, delta_basis.y / 2.0))
 	transform.basis = transform.basis.slerp(target_forward, 30.0 * delta).orthonormalized()
 	_previous_forward = _current_forward
 

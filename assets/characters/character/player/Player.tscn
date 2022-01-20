@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=2]
+[gd_scene load_steps=31 format=2]
 
 [ext_resource path="res://assets/characters/character/Character.tscn" type="PackedScene" id=1]
 [ext_resource path="res://src/game/player_logic/camera_stack/camera_stack.gd" type="Script" id=2]
@@ -28,7 +28,8 @@
 [ext_resource path="res://src/game/player_logic/arms_stack/arms_behaviour/behaviours/arms_look_angular_sway.gd" type="Script" id=26]
 [ext_resource path="res://src/game/player_logic/arms_stack/arms_behaviour/behaviours/arms_look_linear_sway.gd" type="Script" id=27]
 [ext_resource path="res://src/game/player_logic/arms_stack/arms_behaviour/behaviours/arms_move_linear_sway.gd" type="Script" id=28]
-[ext_resource path="res://src/game/player_logic/arms_stack/arms_behaviour/behaviours/arms_recoil/arms_recoil.gd" type="Script" id=29]
+[ext_resource path="res://src/game/player_logic/arms_stack/arms_behaviour/behaviours/arms_linear_recoil/arms_linear_recoil.gd" type="Script" id=29]
+[ext_resource path="res://src/game/player_logic/arms_stack/arms_behaviour/behaviours/arms_recoil/arms_recoil.gd" type="Script" id=30]
 
 [node name="Player" instance=ExtResource( 1 )]
 script = ExtResource( 5 )
@@ -39,7 +40,7 @@ behaviors = [ ExtResource( 14 ), ExtResource( 3 ), ExtResource( 23 ), ExtResourc
 
 [node name="ArmsStack" type="Spatial" parent="." index="2"]
 script = ExtResource( 16 )
-behaviors = [ ExtResource( 17 ), ExtResource( 28 ), ExtResource( 20 ), ExtResource( 29 ), ExtResource( 21 ), ExtResource( 27 ), ExtResource( 26 ) ]
+behaviors = [ ExtResource( 17 ), ExtResource( 28 ), ExtResource( 20 ), ExtResource( 30 ), ExtResource( 21 ), ExtResource( 27 ), ExtResource( 26 ), ExtResource( 29 ) ]
 
 [node name="MovementStateMachine" type="Node" parent="." index="3"]
 script = ExtResource( 4 )

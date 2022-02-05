@@ -444,6 +444,16 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://src/game/item_logic/inventory/slot/type_slot.gd"
 }, {
+"base": "Spatial",
+"class": "UpperBodyBehaviour",
+"language": "GDScript",
+"path": "res://src/game/player_logic/upper_body_stack/upper_body_behaviour/upper_body_behaviour.gd"
+}, {
+"base": "Spatial",
+"class": "UpperBodyStack",
+"language": "GDScript",
+"path": "res://src/game/player_logic/upper_body_stack/upper_body_stack.gd"
+}, {
 "base": "Equipable",
 "class": "Weapon",
 "language": "GDScript",
@@ -547,6 +557,8 @@ _global_script_class_icons={
 "TriggerSingleFire": "",
 "TriggerSingleFireData": "",
 "TypeSlot": "",
+"UpperBodyBehaviour": "",
+"UpperBodyStack": "",
 "Weapon": "",
 "WeaponData": "",
 "tt": ""

@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=2]
+[gd_scene load_steps=36 format=2]
 
 [ext_resource path="res://assets/characters/character/Character.tscn" type="PackedScene" id=1]
 [ext_resource path="res://src/game/player_logic/camera_stack/camera_stack.gd" type="Script" id=2]
@@ -31,6 +31,10 @@
 [ext_resource path="res://src/game/player_logic/arms_stack/arms_behaviour/behaviours/arms_linear_recoil/arms_linear_recoil.gd" type="Script" id=29]
 [ext_resource path="res://src/game/player_logic/arms_stack/arms_behaviour/behaviours/arms_recoil/arms_recoil.gd" type="Script" id=30]
 [ext_resource path="res://src/game/character/character_test_arms/TestArms.tscn" type="PackedScene" id=31]
+[ext_resource path="res://src/game/player_logic/upper_body_stack/upper_body_stack.gd" type="Script" id=32]
+[ext_resource path="res://src/game/player_logic/upper_body_stack/upper_body_behaviour/behaviours/upper_body_look_around.gd" type="Script" id=33]
+[ext_resource path="res://src/game/player_logic/upper_body_stack/upper_body_behaviour/behaviours/upper_body_crouch.gd" type="Script" id=34]
+[ext_resource path="res://src/game/player_logic/upper_body_stack/upper_body_behaviour/behaviours/upper_body_pos_offset.gd" type="Script" id=35]
 
 [node name="Player" instance=ExtResource( 1 )]
 script = ExtResource( 5 )
@@ -43,13 +47,15 @@ behaviors = [ ExtResource( 14 ), ExtResource( 3 ), ExtResource( 23 ), ExtResourc
 script = ExtResource( 16 )
 behaviors = [ ExtResource( 17 ), ExtResource( 28 ), ExtResource( 20 ), ExtResource( 30 ), ExtResource( 21 ), ExtResource( 27 ), ExtResource( 26 ), ExtResource( 29 ) ]
 
-[node name="MovementStateMachine" type="Node" parent="." index="3"]
+[node name="UpperBodyStack" type="Spatial" parent="." index="3"]
+script = ExtResource( 32 )
+test_arms = ExtResource( 31 )
+behaviors = [ ExtResource( 33 ), ExtResource( 34 ), ExtResource( 35 ) ]
+
+[node name="MovementStateMachine" type="Node" parent="." index="4"]
 script = ExtResource( 4 )
 states_paths = [ ExtResource( 6 ), ExtResource( 7 ), ExtResource( 8 ), ExtResource( 9 ), ExtResource( 10 ), ExtResource( 11 ), ExtResource( 12 ), ExtResource( 13 ) ]
 
-[node name="ArmsStateMachine" type="Node" parent="." index="4"]
+[node name="ArmsStateMachine" type="Node" parent="." index="5"]
 script = ExtResource( 15 )
 states_paths = [ ExtResource( 19 ), ExtResource( 18 ) ]
-
-[node name="TestArms" parent="." index="5" instance=ExtResource( 31 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.63738, 0.15 )

@@ -73,6 +73,12 @@ _weapon_data = SubResource( 4 )
 mesh = SubResource( 5 )
 material/0 = null
 
+[node name="GrabPoint1" parent="." index="2"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0689606, 0, -0.143304 )
+
+[node name="GrabPoint2" parent="." index="3"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0591373, 0.161333 )
+
 [node name="MuzzleLocation" type="Position3D" parent="." index="4"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.4 )
 

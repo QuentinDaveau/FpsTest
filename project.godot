@@ -214,6 +214,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://src/game/weapon_logic/projectiles/behaviours/hit_behaviour/hit_behaviour.gd"
 }, {
+"base": "Resource",
+"class": "IkJoint",
+"language": "GDScript",
+"path": "res://src/game/engine/utility/ik/ik_joint.gd"
+}, {
 "base": "Node",
 "class": "InputListener",
 "language": "GDScript",
@@ -496,6 +501,7 @@ _global_script_class_icons={
 "ExpandingInventory": "",
 "GroupSlot": "",
 "HitBehaviour": "",
+"IkJoint": "",
 "InputListener": "",
 "InstanceContainer": "",
 "Inventory": "",

@@ -1,0 +1,120 @@
+[gd_scene load_steps=13 format=2]
+
+[ext_resource path="res://src/game/engine/utility/ik/simple_ik.gd" type="Script" id=1]
+[ext_resource path="res://src/game/character/character_test_arms/test_arms.gd" type="Script" id=2]
+[ext_resource path="res://src/game/engine/utility/ik/ik_joint.gd" type="Script" id=3]
+
+[sub_resource type="Resource" id=4]
+script = ExtResource( 3 )
+target_transform = NodePath("ArmLeftTop")
+constraint = 0.0
+magnet = NodePath("")
+
+[sub_resource type="Resource" id=5]
+script = ExtResource( 3 )
+target_transform = NodePath("ArmLeftTop/ArmLeftBottom")
+constraint = 0.0
+magnet = NodePath("Magnet")
+
+[sub_resource type="Resource" id=6]
+script = ExtResource( 3 )
+target_transform = NodePath("ArmLeftTop/ArmLeftBottom/ArmLeftHand")
+constraint = 0.0
+magnet = NodePath("")
+
+[sub_resource type="CubeMesh" id=1]
+size = Vector3( 0.05, 0.05, 0.5 )
+
+[sub_resource type="CubeMesh" id=2]
+size = Vector3( 0.05, 0.05, 0.4 )
+
+[sub_resource type="CubeMesh" id=3]
+size = Vector3( 0.05, 0.05, 0.1 )
+
+[sub_resource type="Resource" id=7]
+script = ExtResource( 3 )
+target_transform = NodePath("ArmRightTop")
+constraint = 0.0
+magnet = NodePath("")
+
+[sub_resource type="Resource" id=8]
+script = ExtResource( 3 )
+target_transform = NodePath("ArmRightTop/ArmRightBottom")
+constraint = 0.0
+magnet = NodePath("Magnet")
+
+[sub_resource type="Resource" id=9]
+script = ExtResource( 3 )
+target_transform = NodePath("ArmRightTop/ArmRightBottom/ArmRightHand")
+constraint = 0.0
+magnet = NodePath("")
+
+[node name="TestArms" type="Spatial"]
+script = ExtResource( 2 )
+
+[node name="ArmLeft" type="Spatial" parent="."]
+transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -0.25, 0, 0 )
+script = ExtResource( 1 )
+_joints = [ SubResource( 4 ), SubResource( 5 ), SubResource( 6 ) ]
+
+[node name="ArmLeftTop" type="Spatial" parent="ArmLeft"]
+
+[node name="MeshInstance" type="MeshInstance" parent="ArmLeft/ArmLeftTop"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.25 )
+mesh = SubResource( 1 )
+material/0 = null
+
+[node name="ArmLeftBottom" type="Spatial" parent="ArmLeft/ArmLeftTop"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.5 )
+
+[node name="MeshInstance" type="MeshInstance" parent="ArmLeft/ArmLeftTop/ArmLeftBottom"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.2 )
+mesh = SubResource( 2 )
+skeleton = NodePath("../../..")
+material/0 = null
+
+[node name="ArmLeftHand" type="Spatial" parent="ArmLeft/ArmLeftTop/ArmLeftBottom"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.4 )
+
+[node name="MeshInstance" type="MeshInstance" parent="ArmLeft/ArmLeftTop/ArmLeftBottom/ArmLeftHand"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.05 )
+mesh = SubResource( 3 )
+material/0 = null
+
+[node name="Magnet" type="Spatial" parent="ArmLeft"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.7, -0.5, -0.4 )
+
+[node name="ArmRight" type="Spatial" parent="."]
+transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0.25, 0, 0 )
+script = ExtResource( 1 )
+_joints = [ SubResource( 7 ), SubResource( 8 ), SubResource( 9 ) ]
+
+[node name="ArmRightTop" type="Spatial" parent="ArmRight"]
+
+[node name="MeshInstance" type="MeshInstance" parent="ArmRight/ArmRightTop"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.25 )
+mesh = SubResource( 1 )
+material/0 = null
+
+[node name="ArmRightBottom" type="Spatial" parent="ArmRight/ArmRightTop"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.5 )
+
+[node name="MeshInstance" type="MeshInstance" parent="ArmRight/ArmRightTop/ArmRightBottom"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.2 )
+mesh = SubResource( 2 )
+skeleton = NodePath("../../..")
+material/0 = null
+
+[node name="ArmRightHand" type="Spatial" parent="ArmRight/ArmRightTop/ArmRightBottom"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.4 )
+
+[node name="MeshInstance" type="MeshInstance" parent="ArmRight/ArmRightTop/ArmRightBottom/ArmRightHand"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.05 )
+mesh = SubResource( 3 )
+material/0 = null
+
+[node name="Magnet" type="Spatial" parent="ArmRight"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.7, -0.5, -0.4 )
+__meta__ = {
+"_editor_description_": ""
+}

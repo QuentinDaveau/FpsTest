@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=2]
+[gd_scene load_steps=32 format=2]
 
 [ext_resource path="res://assets/characters/character/Character.tscn" type="PackedScene" id=1]
 [ext_resource path="res://src/game/player_logic/camera_stack/camera_stack.gd" type="Script" id=2]
@@ -30,6 +30,7 @@
 [ext_resource path="res://src/game/player_logic/arms_stack/arms_behaviour/behaviours/arms_move_linear_sway.gd" type="Script" id=28]
 [ext_resource path="res://src/game/player_logic/arms_stack/arms_behaviour/behaviours/arms_linear_recoil/arms_linear_recoil.gd" type="Script" id=29]
 [ext_resource path="res://src/game/player_logic/arms_stack/arms_behaviour/behaviours/arms_recoil/arms_recoil.gd" type="Script" id=30]
+[ext_resource path="res://src/game/character/character_test_arms/TestArms.tscn" type="PackedScene" id=31]
 
 [node name="Player" instance=ExtResource( 1 )]
 script = ExtResource( 5 )
@@ -49,3 +50,6 @@ states_paths = [ ExtResource( 6 ), ExtResource( 7 ), ExtResource( 8 ), ExtResour
 [node name="ArmsStateMachine" type="Node" parent="." index="4"]
 script = ExtResource( 15 )
 states_paths = [ ExtResource( 19 ), ExtResource( 18 ) ]
+
+[node name="TestArms" parent="." index="5" instance=ExtResource( 31 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.63738, 0.15 )

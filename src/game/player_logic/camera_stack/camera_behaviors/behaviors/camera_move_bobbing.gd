@@ -39,7 +39,7 @@ func set_state(new_state: int) -> void:
 
 # TEMP: Dirty magic strings
 func _on_player_state_changed(var new_state: String) -> void:
-	if new_state.begins_with("Crouch"):
+	if new_state.begins_with("CrouchMove"):
 		set_state(STATES.CROUCH)
 		return
 	if new_state.begins_with("Walk"):

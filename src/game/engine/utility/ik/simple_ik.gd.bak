@@ -100,7 +100,6 @@ func _get_rads(degrees: float) -> float:
 class JointResolver:
 	var _joint: Spatial
 	var _magnet: Spatial
-	var _forward_locker: ForwardLocker
 	
 	# Accessing directly position and distance instead of passing by a func helps a lot to gain ms
 	var position: Vector3
@@ -166,7 +165,7 @@ class ForwardLocker:
 	
 	
 	func get_global_forward() -> Vector3:
-		return _target.global_transform.basis.xform(_forward)
+		return _target.to_global(_forward)
 
 
 

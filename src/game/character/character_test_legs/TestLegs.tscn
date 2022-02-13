@@ -1,0 +1,147 @@
+[gd_scene load_steps=14 format=2]
+
+[ext_resource path="res://src/game/engine/utility/ik/simple_ik.gd" type="Script" id=1]
+[ext_resource path="res://src/game/character/character_test_legs/test_legs.gd" type="Script" id=2]
+[ext_resource path="res://src/game/engine/utility/ik/ik_joint.gd" type="Script" id=3]
+
+[sub_resource type="Resource" id=4]
+script = ExtResource( 3 )
+target_transform = NodePath("LegLeftTop")
+constraint = 0.0
+magnet = NodePath("")
+
+[sub_resource type="Resource" id=5]
+script = ExtResource( 3 )
+target_transform = NodePath("LegLeftTop/LegLeftBottom")
+constraint = 0.0
+magnet = NodePath("Magnet")
+
+[sub_resource type="Resource" id=6]
+script = ExtResource( 3 )
+target_transform = NodePath("LegLeftTop/LegLeftBottom/LegLeftFoot")
+constraint = 0.0
+magnet = NodePath("")
+
+[sub_resource type="CubeMesh" id=1]
+size = Vector3( 0.05, 0.05, 0.5 )
+
+[sub_resource type="CubeMesh" id=2]
+size = Vector3( 0.05, 0.05, 0.4 )
+
+[sub_resource type="CubeMesh" id=3]
+size = Vector3( 0.05, 0.05, 0.2 )
+
+[sub_resource type="Resource" id=7]
+script = ExtResource( 3 )
+target_transform = NodePath("LegRightTop")
+constraint = 0.0
+magnet = NodePath("")
+
+[sub_resource type="Resource" id=8]
+script = ExtResource( 3 )
+target_transform = NodePath("LegRightTop/LegRightBottom")
+constraint = 0.0
+magnet = NodePath("Magnet")
+
+[sub_resource type="Resource" id=9]
+script = ExtResource( 3 )
+target_transform = NodePath("LegRightTop/LegRightBottom/LegRightFoot")
+constraint = 0.0
+magnet = NodePath("")
+
+[sub_resource type="CubeMesh" id=10]
+size = Vector3( 0.45, 0.4, 0.25 )
+
+[node name="TestLegs" type="Spatial"]
+script = ExtResource( 2 )
+_ik_target_left_path = NodePath("LegLeft/Target")
+_ik_target_right_path = NodePath("LegRight/Target")
+_anim_target_left_path = NodePath("AnimTargetLeft")
+_anim_target_right_path = NodePath("AnimTargetRight")
+
+[node name="LegLeft" type="Spatial" parent="."]
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, -0.15, -0.4, 0 )
+script = ExtResource( 1 )
+_target_path = NodePath("Target")
+_joints = [ SubResource( 4 ), SubResource( 5 ), SubResource( 6 ) ]
+
+[node name="LegLeftTop" type="Spatial" parent="LegLeft"]
+
+[node name="MeshInstance" type="MeshInstance" parent="LegLeft/LegLeftTop"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.25 )
+mesh = SubResource( 1 )
+material/0 = null
+
+[node name="LegLeftBottom" type="Spatial" parent="LegLeft/LegLeftTop"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.5 )
+
+[node name="MeshInstance" type="MeshInstance" parent="LegLeft/LegLeftTop/LegLeftBottom"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.2 )
+mesh = SubResource( 2 )
+skeleton = NodePath("../../..")
+material/0 = null
+
+[node name="LegLeftFoot" type="Spatial" parent="LegLeft/LegLeftTop/LegLeftBottom"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.4 )
+
+[node name="MeshInstance" type="MeshInstance" parent="LegLeft/LegLeftTop/LegLeftBottom/LegLeftFoot"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.1 )
+mesh = SubResource( 3 )
+material/0 = null
+
+[node name="Magnet" type="Spatial" parent="LegLeft"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.01, 0.335488, -0.211 )
+
+[node name="Target" type="Spatial" parent="LegLeft"]
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0.15, -1.31134e-08, 0.3 )
+
+[node name="LegRight" type="Spatial" parent="."]
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0.15, -0.4, 0 )
+script = ExtResource( 1 )
+_target_path = NodePath("Target")
+_joints = [ SubResource( 7 ), SubResource( 8 ), SubResource( 9 ) ]
+
+[node name="LegRightTop" type="Spatial" parent="LegRight"]
+
+[node name="MeshInstance" type="MeshInstance" parent="LegRight/LegRightTop"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.25 )
+mesh = SubResource( 1 )
+material/0 = null
+
+[node name="LegRightBottom" type="Spatial" parent="LegRight/LegRightTop"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.5 )
+
+[node name="MeshInstance" type="MeshInstance" parent="LegRight/LegRightTop/LegRightBottom"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.2 )
+mesh = SubResource( 2 )
+skeleton = NodePath("../../..")
+material/0 = null
+
+[node name="LegRightFoot" type="Spatial" parent="LegRight/LegRightTop/LegRightBottom"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.4 )
+
+[node name="MeshInstance" type="MeshInstance" parent="LegRight/LegRightTop/LegRightBottom/LegRightFoot"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.1 )
+mesh = SubResource( 3 )
+material/0 = null
+
+[node name="Magnet" type="Spatial" parent="LegRight"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.01, 0.327066, -0.211 )
+__meta__ = {
+"_editor_description_": ""
+}
+
+[node name="Target" type="Spatial" parent="LegRight"]
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, -0.15, -1.31134e-08, 0.3 )
+
+[node name="Body" type="MeshInstance" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.2, 0 )
+portal_mode = 4
+mesh = SubResource( 10 )
+material/0 = null
+
+[node name="AnimTargetLeft" type="Spatial" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.148444, -1.40427, 0 )
+
+[node name="AnimTargetRight" type="Spatial" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.146884, -1.41177, 0 )

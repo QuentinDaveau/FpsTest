@@ -274,6 +274,16 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://src/game/debug/services/logger.gd"
 }, {
+"base": "Spatial",
+"class": "LowerBodyBehaviour",
+"language": "GDScript",
+"path": "res://src/game/player_logic/lower_body_stack/lower_body_behaviour/lower_body_behaviour.gd"
+}, {
+"base": "Spatial",
+"class": "LowerBodyStack",
+"language": "GDScript",
+"path": "res://src/game/player_logic/lower_body_stack/lower_body_stack.gd"
+}, {
 "base": "ProjectileBehaviour",
 "class": "MotionBehaviour",
 "language": "GDScript",
@@ -523,6 +533,8 @@ _global_script_class_icons={
 "LifeBehaviour": "",
 "LinearRecoiler": "",
 "Logger": "",
+"LowerBodyBehaviour": "",
+"LowerBodyStack": "",
 "MotionBehaviour": "",
 "MovementAction": "",
 "MovementState": "",

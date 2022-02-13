@@ -553,7 +553,7 @@ transform = Transform( 0.892979, 0.101771, 0.438442, -0.444396, 0.353917, 0.8229
 shadow_enabled = true
 
 [node name="PlayerSpawner" type="Spatial" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 12.0666, 2.72603, 12.3211 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 15.5139, 1.58454, -2.71418 )
 script = ExtResource( 2 )
 
 [node name="Pickable" type="Spatial" parent="."]

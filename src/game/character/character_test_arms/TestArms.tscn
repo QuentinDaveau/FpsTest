@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://src/game/engine/utility/ik/simple_ik.gd" type="Script" id=1]
 [ext_resource path="res://src/game/character/character_test_arms/test_arms.gd" type="Script" id=2]
@@ -49,11 +49,14 @@ target_transform = NodePath("ArmRightTop/ArmRightBottom/ArmRightHand")
 constraint = 0.0
 magnet = NodePath("")
 
+[sub_resource type="CubeMesh" id=10]
+size = Vector3( 0.4, 0.6, 0.2 )
+
 [node name="TestArms" type="Spatial"]
 script = ExtResource( 2 )
 
 [node name="ArmLeft" type="Spatial" parent="."]
-transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -0.25, 0, 0 )
+transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -0.2, 0, 0 )
 script = ExtResource( 1 )
 _joints = [ SubResource( 4 ), SubResource( 5 ), SubResource( 6 ) ]
 
@@ -82,10 +85,10 @@ mesh = SubResource( 3 )
 material/0 = null
 
 [node name="Magnet" type="Spatial" parent="ArmLeft"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.7, -0.5, -0.4 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.250773, -1.98633, -1.50321 )
 
 [node name="ArmRight" type="Spatial" parent="."]
-transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0.25, 0, 0 )
+transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0.2, 0, 0 )
 script = ExtResource( 1 )
 _joints = [ SubResource( 7 ), SubResource( 8 ), SubResource( 9 ) ]
 
@@ -114,7 +117,13 @@ mesh = SubResource( 3 )
 material/0 = null
 
 [node name="Magnet" type="Spatial" parent="ArmRight"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.7, -0.5, -0.4 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.13143, -1.58074, -1.30675 )
 __meta__ = {
 "_editor_description_": ""
 }
+
+[node name="Body" type="MeshInstance" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.2, 0 )
+portal_mode = 4
+mesh = SubResource( 10 )
+material/0 = null
